@@ -7,7 +7,6 @@
 let numeros = [5,2,9,1,7];
 
 function ordenados(array) {
-
     return array.sort((a,b) => a - b);
 }
 

@@ -22,7 +22,6 @@ function precioPlatos(menu) {
             platoEconomico.push(plato)
         }
     }
-
     return platoEconomico;
 }
 

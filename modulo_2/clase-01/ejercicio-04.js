@@ -17,7 +17,6 @@ function contandoVocales(string) {
             contador++;
         }
     }
-
     return contador;
 }
 
