@@ -19,3 +19,13 @@ const libro = {
     "Novela"
   ]
 }
+
+console.log("Titulo:", libro.titulo);
+console.log("Autor", libro.autor);
+
+libro.año=1990;
+libro.paginas=129;
+
+console.log("Libro actualizado", libro);
+
+

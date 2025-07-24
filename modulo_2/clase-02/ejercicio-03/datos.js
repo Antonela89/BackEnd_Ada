@@ -1,5 +1,5 @@
 const curso = {
-  "nombreDelCurso": "Introducción a la Programación en Python",
+  "nombreCurso": "Introducción a la Programación en Python",
   "profesor": "Dr. Alejandro Torres",
   "duracionSemanas": 12,
   "temas": [
@@ -10,6 +10,6 @@ const curso = {
   ]
 };
 
-module.export = {
+module.exports = {
     curso
 }

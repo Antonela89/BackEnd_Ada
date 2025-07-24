@@ -17,4 +17,32 @@
 //     *   Calcula y muestra el promedio de notas de un estudiante específico.
 //     *   Agrega un nuevo estudiante al array y muestra el array actualizado en formato JSON.
 
-const {estudiantes} = require('./estudiantes.js');
+const { estudiantes } = require('./estudiantes.js');
+
+let nombresEstudiantes = estudiantes.map(estudiante => estudiante.nombre)
+console.log(nombresEstudiantes);
+
+if (estudiantes.length > 0) {
+    const estudiante = estudiantes[0];
+    const notas = estudiante.notas
+    const promedio = (notas.reduce((accu, nota) => accu + nota, 0)) / notas.length;
+
+    console.log(`\nEl promedio de notas de ${estudiante.nombre} es: ${promedio}`);
+}
+
+const estudiante = {
+    nombre: "María Flores",
+    edad: 24,
+    curso: "Devops",
+    notas: [79, 80, 93, 85]
+}
+
+estudiantes.push(estudiante);
+
+// Muestra el array actualizado en formato JSON.
+console.log("\nArray de estudiantes actualizado:");
+console.log(JSON.stringify(estudiantes, null, 2));
+
+
+
+

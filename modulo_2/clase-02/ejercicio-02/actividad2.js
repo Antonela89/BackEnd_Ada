@@ -14,3 +14,12 @@ const estudiante = {
   curso: "Desarrollo Web Avanzado",
   notas: [95, 88, 92, 89]
 };
+
+
+const estudianteJson = JSON.stringify(estudiante); // convierte a Json
+
+console.log("\nMostramos estudiante como JSON:\n", estudianteJson);
+
+const estudianteJs = JSON.parse(estudianteJson); // Convierte a objeto JS
+
+console.log("\nMostramos estudiante como objeto:\n", estudianteJs);
