@@ -30,6 +30,7 @@ if (estudiantes.length > 0) {
     console.log(`\nEl promedio de notas de ${estudiante.nombre} es: ${promedio}`);
 }
 
+// se crea el objeto estudiante
 const estudiante = {
     nombre: "María Flores",
     edad: 24,
@@ -37,6 +38,7 @@ const estudiante = {
     notas: [79, 80, 93, 85]
 }
 
+// se agrega el estudiante al array
 estudiantes.push(estudiante);
 
 // Muestra el array actualizado en formato JSON.
