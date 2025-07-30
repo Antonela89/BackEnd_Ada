@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "descripcion": "Limpiar baño",
+    "estado": "completada"
+  },
+  {
+    "id": 2,
+    "descripcion": "Tender Cama",
+    "estado": "pendiente"
+  }
+]

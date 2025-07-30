@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "nombre": "E-commerce",
+    "estado": "finalizado"
+  },
+  {
+    "id": 2,
+    "nombre": "sitio web",
+    "estado": "en proceso"
+  }
+]

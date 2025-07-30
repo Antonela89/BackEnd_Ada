@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "nombre": "Botella Coca-Cola",
+    "stock": 8
+  },
+  {
+    "id": 2,
+    "nombre": "Lata Coca-Cola",
+    "stock": 6
+  }
+]
