@@ -1,0 +1,12 @@
+[
+  {
+    "nombre": "limpieza",
+    "descripcion": "barrer el piso",
+    "estado": "completa"
+  },
+  {
+    "nombre": "limpieza",
+    "descripcion": "pasar el piso",
+    "estado": "pendiente"
+  }
+]
