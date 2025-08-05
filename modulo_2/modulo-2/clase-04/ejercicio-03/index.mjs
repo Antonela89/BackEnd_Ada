@@ -19,7 +19,6 @@ fs.readFile('../ejercicio-01/perfil.json', (error, data) => {
         });
         console.log('El perfil se ha actualizado', perfil);
     } else {
-        console.log('No se puede leer el archivo', error);
-        
+        console.log('No se puede leer el archivo', error); 
     }
 })
