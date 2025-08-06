@@ -3,7 +3,6 @@ const net = require('net');
 
 // 2- definición de puerto
 const PORT = 4000;
-const HOST = '127.0.0.1';
 
 // 3- creación de un servidor TCP con el método createServer() del modulo net
 const server = net.createServer((socket) => {
@@ -26,7 +25,7 @@ const server = net.createServer((socket) => {
 });
 
 // poner el servidor a escuchar en el puerto establecido anteriormente
-server.listen(PORT, HOST, () => {
+server.listen(PORT, () => {
     // enviamos msj por consola avisando que el puerto esta activo
-    console.log(`Servidor escuchando en el puerto ${PORT} en ${HOST}`);   
+    console.log(`Servidor escuchando en el puerto ${PORT}`);   
 })

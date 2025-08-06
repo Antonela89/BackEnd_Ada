@@ -2,9 +2,12 @@ const net = require('net'); // importación del modulo net
 
 const PORT = 5000; // definiendo puerto
 
+let clientesConectados = 0;
+
 //creacion de servidor
 const server = net.createServer((socket) => { //objeto socket -> conexion establecida con el cliente
-    console.log(`"¡Un cliente se ha conectado!"`) // ejercicio 2
+    clientesConectados += 1;
+    console.log(`Un cliente se ha conectado. Clientes conectados: ${clientesConectados}`) // ejercicio 2
 
     socket.on('data', (data) => {
         // manejo de informacion recibida por parte del cliente
@@ -16,13 +19,14 @@ const server = net.createServer((socket) => { //objeto socket -> conexion establ
 
     //manejo de cierre
     socket.on('end', () => {
-        console.log('Cliente desconectado');
+        clientesConectados -= 1;
+        console.log(`Un cliente se ha desconectado. Clientes conectados: ${clientesConectados}`);
     })
 });
 
 //poniendo el servidor a escuchar
 server.listen(PORT, () => {
     //mensaje en consola
-    console.log(`Servidor esuchando en el puerto: ${PORT} en ${HOST}`);
+    console.log(`Servidor escuchando en el puerto: ${PORT}`);
 })
 

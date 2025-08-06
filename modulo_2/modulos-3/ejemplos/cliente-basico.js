@@ -2,11 +2,10 @@
 const net = require('net');
 
 // definicion del puerto
-const PORT = 4000;
-const HOST = '127.0.0.1';
+const PORT = 5000;
 
 // creando cliente con el metodo createConnetion
-const client = net.createConnection({ port: PORT, host: HOST }, () => {
+const client = net.createConnection({ port: PORT }, () => {
     console.log('Conectando al servidor...');
     // enviando msj al servidor
     client.write('Hola Servidor');
