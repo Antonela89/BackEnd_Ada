@@ -7,17 +7,26 @@
 // *   Usa el evento `connection` para incrementar el contador y enviar el mensaje al cliente.
 // *   Usa el evento `close` para reducir el contador cuando un cliente se desconecta.
 
-const net = require('net');
+const net = require("net");
 
 const PORT = 5000;
 
 let conexiones = 0;
 
 const server = net.createServer((socket) => {
-    console.log(`Un cliente a ingresado al servidor.`);
-    
+  console.log(`Un cliente a ingresado al servidor.`);
+  conexiones += 1;
+  console.log(`Conexiones: ${conexiones}`);
+
+  socket.write(`¡Bienvenido! Eres el cliente número ${connectionCount}.\n`);
+
+  socket.on("close", () => {
+    console.log(`El cliente se ha desconectado`);
+    conexiones -= 1;
+    console.log(`Conexiones: ${conexiones}`);
+  });
 });
 
 server.listen(PORT, () => {
-    console.log(`El servidor esta escuchando en el puerto: ${PORT}`);
+  console.log(`El servidor esta escuchando en el puerto: ${PORT}`);
 });
