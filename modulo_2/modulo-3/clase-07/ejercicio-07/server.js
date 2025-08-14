@@ -16,10 +16,10 @@ const PORT = 5000;
 let clientes = [];
 
 // empleo una función auxiliar para avisar a los demás clientes el msj del cliente que escribio, este no recibe su propio msj
-const retrasmitir = (mensaje, remitente) => {
+const retransmitir = (mensaje, remitente) => {
   clientes.forEach((cliente) => {
     if (cliente !== remitente) {
-      socket.write(mensaje);
+      cliente.write(mensaje);
     }
   });
 };
@@ -33,7 +33,7 @@ const server = net.createServer((socket) => {
   clientes.push(socket);
 
   // se avisa a otros clientes del ingreso de un nuevo cliente
-  retrasmitir(`${clientId} se ha unido al chat.\n`, socket);
+  retransmitir(`${clientId} se ha unido al chat.\n`, socket);
 
   //se envia msj solo al nuevo cliente
   socket.write("¡Bienvenido al chat grupal!\n");
@@ -45,7 +45,7 @@ const server = net.createServer((socket) => {
 
     // reenvio de mensaje
     const mensajeConID = `${clientId}: ${mensaje}`;
-    retrasmitir(mensajeConID, socket);
+    retransmitir(mensajeConID, socket);
   });
 
   socket.on("end", () => {
@@ -56,7 +56,7 @@ const server = net.createServer((socket) => {
       clientes.splice(encontrado, 1);
     }
 
-    retrasmitir(`${clientId} ha abandonado el chat.\n`, socket);
+    retransmitir(`${clientId} ha abandonado el chat.\n`, socket);
   });
 
     socket.on("error", (err) => {
