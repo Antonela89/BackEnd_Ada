@@ -57,5 +57,3 @@ client.unref();
 // ref -> reactiva la función del socket de mantener el proceso node.js si es el unico manejador de eventos en el proceso
 // evita que el proceso finalice prematuramente
 client.ref()
-
-// 2- manejo de eventos -> a la escucha de eventos 
