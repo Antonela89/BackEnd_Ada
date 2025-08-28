@@ -43,6 +43,7 @@ switch (indiceSeleccionado) {
         break;
 }
 
+
 // ¿Qué es un Hash?
 
 // Imagina que tienes un documento muy largo y quieres una forma rápida de verificar si alguien lo ha modificado, aunque sea en una sola letra. Un "hash" (o función de resumen) es como una "huella digital" única para ese documento.
