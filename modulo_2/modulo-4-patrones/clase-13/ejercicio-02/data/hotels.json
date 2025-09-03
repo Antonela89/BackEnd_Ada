@@ -1,0 +1,172 @@
+[
+  {
+    "id": 1,
+    "nombre": "Grand Hotel Paraíso",
+    "ubicacion": {
+      "ciudad": "Cancún",
+      "pais": "México",
+      "direccion": "Av. Kukulcan Km. 15"
+    },
+    "estrellas": 5,
+    "precio_noche": 350.75,
+    "todo_incluido": true,
+    "disponibilidad": {
+      "habitaciones_totales": 250,
+      "habitaciones_ocupadas": 180,
+      "disponible_hoy": true
+    }
+  },
+  {
+    "id": 2,
+    "nombre": "Refugio Alpino Lodge",
+    "ubicacion": {
+      "ciudad": "Bariloche",
+      "pais": "Argentina",
+      "direccion": "Ruta de los 7 Lagos Km. 22"
+    },
+    "estrellas": 4,
+    "precio_noche": 180.50,
+    "todo_incluido": false,
+    "disponibilidad": {
+      "habitaciones_totales": 40,
+      "habitaciones_ocupadas": 38,
+      "disponible_hoy": true
+    }
+  },
+  {
+    "id": 3,
+    "nombre": "Urban Central Suites",
+    "ubicacion": {
+      "ciudad": "Madrid",
+      "pais": "España",
+      "direccion": "Gran Vía, 58"
+    },
+    "estrellas": 4,
+    "precio_noche": 150.00,
+    "todo_incluido": false,
+    "disponibilidad": {
+      "habitaciones_totales": 120,
+      "habitaciones_ocupadas": 120,
+      "disponible_hoy": false
+    }
+  },
+  {
+    "id": 4,
+    "nombre": "Oasis del Desierto Resort",
+    "ubicacion": {
+      "ciudad": "Dubái",
+      "pais": "Emiratos Árabes Unidos",
+      "direccion": "Al Qudra Road"
+    },
+    "estrellas": 5,
+    "precio_noche": 520.00,
+    "todo_incluido": true,
+    "disponibilidad": {
+      "habitaciones_totales": 85,
+      "habitaciones_ocupadas": 60,
+      "disponible_hoy": true
+    }
+  },
+  {
+    "id": 5,
+    "nombre": "Kyoto Garden Ryokan",
+    "ubicacion": {
+      "ciudad": "Kioto",
+      "pais": "Japón",
+      "direccion": "Distrito de Gion"
+    },
+    "estrellas": 5,
+    "precio_noche": 410.20,
+    "todo_incluido": false,
+    "disponibilidad": {
+      "habitaciones_totales": 15,
+      "habitaciones_ocupadas": 10,
+      "disponible_hoy": true
+    }
+  },
+  {
+    "id": 6,
+    "nombre": "Boutique Hotel ArteVivo",
+    "ubicacion": {
+      "ciudad": "Oaxaca",
+      "pais": "México",
+      "direccion": "Calle de los Artistas, 12"
+    },
+    "estrellas": 4,
+    "precio_noche": 125.00,
+    "todo_incluido": false,
+    "disponibilidad": {
+      "habitaciones_totales": 25,
+      "habitaciones_ocupadas": 25,
+      "disponible_hoy": false
+    }
+  },
+  {
+    "id": 7,
+    "nombre": "Aventura Ecolodge Amazonas",
+    "ubicacion": {
+      "ciudad": "Iquitos",
+      "pais": "Perú",
+      "direccion": "Reserva Nacional Pacaya Samiria"
+    },
+    "estrellas": 3,
+    "precio_noche": 95.80,
+    "todo_incluido": true,
+    "disponibilidad": {
+      "habitaciones_totales": 30,
+      "habitaciones_ocupadas": 12,
+      "disponible_hoy": true
+    }
+  },
+  {
+    "id": 8,
+    "nombre": "The Royal Crown Hotel",
+    "ubicacion": {
+      "ciudad": "Londres",
+      "pais": "Reino Unido",
+      "direccion": "221B Baker Street"
+    },
+    "estrellas": 5,
+    "precio_noche": 450.00,
+    "todo_incluido": false,
+    "disponibilidad": {
+      "habitaciones_totales": 150,
+      "habitaciones_ocupadas": 98,
+      "disponible_hoy": true
+    }
+  },
+  {
+    "id": 9,
+    "nombre": "Faro de la Costa Hostal",
+    "ubicacion": {
+      "ciudad": "Valparaíso",
+      "pais": "Chile",
+      "direccion": "Cerro Alegre"
+    },
+    "estrellas": 3,
+    "precio_noche": 70.00,
+    "todo_incluido": false,
+    "disponibilidad": {
+      "habitaciones_totales": 20,
+      "habitaciones_ocupadas": 19,
+      "disponible_hoy": true
+    }
+  },
+  {
+    "id": 10,
+    "nombre": "New York Business Tower",
+    "ubicacion": {
+      "ciudad": "Nueva York",
+      "pais": "Estados Unidos",
+      "direccion": "Financial District, 1 Wall St"
+    },
+    "estrellas": 4,
+    "precio_noche": 280.90,
+    "todo_incluido": false,
+    "disponibilidad": {
+      "habitaciones_totales": 300,
+      "habitaciones_ocupadas": 295,
+      "disponible_hoy": true
+    }
+  }
+]

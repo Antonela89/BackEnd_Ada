@@ -1,0 +1,118 @@
+[
+  {
+    "id": 1,
+    "titulo": "El Padrino",
+    "director": "Francis Ford Coppola",
+    "año_estreno": 1972,
+    "genero": [
+      "Crimen",
+      "Drama"
+    ],
+    "duracion_min": 175
+  },
+  {
+    "id": 2,
+    "titulo": "Pulp Fiction",
+    "director": "Quentin Tarantino",
+    "año_estreno": 1994,
+    "genero": [
+      "Crimen",
+      "Drama",
+      "Thriller"
+    ],
+    "duracion_min": 154
+  },
+  {
+    "id": 3,
+    "titulo": "El Señor de los Anillos: El retorno del Rey",
+    "director": "Peter Jackson",
+    "año_estreno": 2003,
+    "genero": [
+      "Aventura",
+      "Fantasía",
+      "Acción"
+    ],
+    "duracion_min": 201
+  },
+  {
+    "id": 4,
+    "titulo": "El viaje de Chihiro",
+    "director": "Hayao Miyazaki",
+    "año_estreno": 2001,
+    "genero": [
+      "Animación",
+      "Aventura",
+      "Fantasía"
+    ],
+    "duracion_min": 125
+  },
+  {
+    "id": 5,
+    "titulo": "Parásitos",
+    "director": "Bong Joon Ho",
+    "año_estreno": 2019,
+    "genero": [
+      "Comedia",
+      "Drama",
+      "Thriller"
+    ],
+    "duracion_min": 132
+  },
+  {
+    "id": 6,
+    "titulo": "Forrest Gump",
+    "director": "Robert Zemeckis",
+    "año_estreno": 1994,
+    "genero": [
+      "Drama",
+      "Romance"
+    ],
+    "duracion_min": 142
+  },
+  {
+    "id": 7,
+    "titulo": "Matrix",
+    "director": "Hermanas Wachowski",
+    "año_estreno": 1999,
+    "genero": [
+      "Acción",
+      "Ciencia ficción"
+    ],
+    "duracion_min": 136
+  },
+  {
+    "id": 8,
+    "titulo": "La La Land",
+    "director": "Damien Chazelle",
+    "año_estreno": 2016,
+    "genero": [
+      "Comedia",
+      "Drama",
+      "Musical"
+    ],
+    "duracion_min": 128
+  },
+  {
+    "id": 9,
+    "titulo": "Blade Runner 2049",
+    "director": "Denis Villeneuve",
+    "año_estreno": 2017,
+    "genero": [
+      "Ciencia ficción",
+      "Misterio",
+      "Thriller"
+    ],
+    "duracion_min": 164
+  },
+  {
+    "id": 10,
+    "titulo": "Ciudad de Dios",
+    "director": "Fernando Meirelles",
+    "año_estreno": 2002,
+    "genero": [
+      "Crimen",
+      "Drama"
+    ],
+    "duracion_min": 130
+  }
+]

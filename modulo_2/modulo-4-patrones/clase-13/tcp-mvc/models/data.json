@@ -1,0 +1,73 @@
+[
+    {
+      "id": 1,
+      "tipo": "Coche",
+      "marca": "Toyota",
+      "modelo": "Corolla",
+      "año": 2022,
+      "color": "Blanco",
+      "combustible": "Gasolina",
+      "puertas": 4,
+      "asientos": 5,
+      "transmision": "Automática",
+      "precio": 25000,
+      "disponible": true
+    },
+    {
+      "id": 2,
+      "tipo": "Moto",
+      "marca": "Honda",
+      "modelo": "CBR500R",
+      "año": 2021,
+      "color": "Rojo",
+      "combustible": "Gasolina",
+      "cilindrada": "500cc",
+      "asientos": 2,
+      "transmision": "Manual",
+      "precio": 7500,
+      "disponible": true
+    },
+    {
+      "id": 3,
+      "tipo": "Camioneta",
+      "marca": "Ford",
+      "modelo": "F-150",
+      "año": 2023,
+      "color": "Negro",
+      "combustible": "Diésel",
+      "puertas": 4,
+      "asientos": 5,
+      "transmision": "Automática",
+      "capacidad_carga_kg": 900,
+      "precio": 45000,
+      "disponible": false
+    },
+    {
+      "id": 4,
+      "tipo": "Bicicleta",
+      "marca": "Specialized",
+      "modelo": "Turbo Levo SL Comp",
+      "año": 2022,
+      "color": "Verde",
+      "tipo_bicicleta": "Eléctrica de montaña",
+      "asistente_pedaleo": true,
+      "autonomia_km": 100,
+      "precio": 6000,
+      "disponible": true
+    },
+    {
+      "id": 5,
+      "tipo": "Coche eléctrico",
+      "marca": "Tesla",
+      "modelo": "Model 3",
+      "año": 2023,
+      "color": "Azul",
+      "combustible": "Eléctrico",
+      "puertas": 4,
+      "asientos": 5,
+      "autonomia_km": 400,
+      "transmision": "Automática",
+      "precio": 50000,
+      "disponible": true
+    }
+  ]
