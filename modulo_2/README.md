@@ -53,14 +53,15 @@ A continuación se detalla el contenido dividido por módulos y clases.
 ### Módulo 4: Patrones
 | Clase | Título | Temas |
 | :--- | :--- | :--- |
-| **11** | **Módulo Path** | 1. Funcionalidades del módulo `path`<br>2. Métodos: join, basename, dirname, extname, resolve, normalize, isAbsolute |
-| **12** | **Patrones** | 1. Patrones de Diseño, Arquitectura y Componentes<br>2. Patrón MVC: Componentes y funcionamiento. |
-| **13** | **Biblioteca UUID** | 1. Creación y uso de archivos JSON en un servidor Node.js<br>2. Biblioteca UUID: Conceptos (MAC, SHA-1, MD5)<br>3. Versiones de UUID (v1, v3, v4, v5) |
-| **14** | **readline-sync y Módulo Crypto** | 1. Métodos de `readline-sync` (question, questionInt, keyInYN, keyInSelect)<br>2. Módulo `crypto`: Algoritmos de Hash<br>3. Métodos: createHash, createHmac, createCipheriv |
+| **11** | **Readline-sync** | 1. Métodos de `readline-sync` (question, questionInt, keyInYN, keyInSelect). |
+| **12** | **Módulo Path** | 1. Funcionalidades del módulo `path`<br>2. Métodos: join, basename, dirname, extname, resolve, normalize, isAbsolute |
+| **13** | **Patrones** | 1. Patrones de Diseño, Arquitectura y Componentes<br>2. Patrón MVC: Componentes y funcionamiento. |
+| **14** | **Biblioteca UUID** | 1. Creación y uso de archivos JSON en un servidor Node.js<br>2. Biblioteca UUID: Conceptos (MAC, SHA-1, MD5)<br>3. Versiones de UUID (v1, v3, v4, v5) |
+| **15** | **Módulo Crypto** |2. Módulo `crypto`: Algoritmos de Hash<br>3. Métodos: createHash, createHmac, createCipheriv |
 
 ### Módulo 5: Desafío Final
 | Clase | Título | Temas |
 | :--- | :--- | :--- |
-| **15** | **Repaso General** | Realización de Blooket y actividades para repasar. |
-| **16** | **Simulacro de Trabajo Práctico Integrador** | Desarrollo de un trabajo práctico similar al final, con la misma carga de contenidos y con la ayuda del docente y tutor. |
-| **17** | **Desafío Final** | Presentación del desafío final del módulo. |
+| **16** | **Repaso General** | Realización de Blooket y actividades para repasar. |
+| **17** | **Simulacro de Trabajo Práctico Integrador** | Desarrollo de un trabajo práctico similar al final, con la misma carga de contenidos y con la ayuda del docente y tutor. |
+| **18** | **Desafío Final** | Presentación del desafío final del módulo. |
