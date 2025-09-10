@@ -56,8 +56,9 @@ A continuación se detalla el contenido dividido por módulos y clases.
 | **11** | **Readline-sync** | 1. Métodos de `readline-sync` (question, questionInt, keyInYN, keyInSelect). |
 | **12** | **Módulo Path** | 1. Funcionalidades del módulo `path`<br>2. Métodos: join, basename, dirname, extname, resolve, normalize, isAbsolute |
 | **13** | **Patrones** | 1. Patrones de Diseño, Arquitectura y Componentes<br>2. Patrón MVC: Componentes y funcionamiento. |
-| **14** | **Biblioteca UUID** | 1. Creación y uso de archivos JSON en un servidor Node.js<br>2. Biblioteca UUID: Conceptos (MAC, SHA-1, MD5)<br>3. Versiones de UUID (v1, v3, v4, v5) |
-| **15** | **Módulo Crypto** |2. Módulo `crypto`: Algoritmos de Hash<br>3. Métodos: createHash, createHmac, createCipheriv |
+| **14** | **Módulo Crypto** |2. Módulo `crypto`: Algoritmos de Hash<br>3. Métodos: createHash, createHmac, createCipheriv |
+| **15** | **Biblioteca UUID** | 1. Creación y uso de archivos JSON en un servidor Node.js<br>2. Biblioteca UUID: Conceptos (MAC, SHA-1, MD5)<br>3. Versiones de UUID (v1, v3, v4, v5) |
+
 
 ### Módulo 5: Desafío Final
 | Clase | Título | Temas |
