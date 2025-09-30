@@ -40,8 +40,7 @@ const server = net.createServer((socket) => {
             socket.write(`Mensaje guardado con éxito!\n`)
         }
     })
-
-    
+ 
     socket.on('end', () => {
         console.log(`\nEl cliente se ha desconectado`);
     })
