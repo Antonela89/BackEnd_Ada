@@ -1,0 +1,15 @@
+{
+  "name": "modulo_3",
+  "version": "1.0.0",
+  "description": "Este curso avanzado está diseñado para profundizar en el uso de TypeScript, una extensión de JavaScript que añade tipado estático y facilita el desarrollo de aplicaciones escalables. Se aprenderá a aplicar Programación Orientada a Objetos (POO), a utilizar ExpressJS para la creación de servidores y la gestión de rutas. Además, se cubrirán en profundidad los conceptos de API REST y operaciones CRUD (Creación, Lectura, Actualización y Eliminación de datos).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
