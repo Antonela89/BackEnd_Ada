@@ -22,7 +22,7 @@ Para validar lo aprendido en este módulo, se realizará un desafío integrador 
 
 ## Módulos y Cronograma
 
-### Módulo: TypeScript
+### Módulo 1: TypeScript
 
 | Clase | Fecha | Temario |
 | :--- | :--- | :--- |
@@ -31,7 +31,7 @@ Para validar lo aprendido en este módulo, se realizará un desafío integrador 
 | **Clase 3**| lun, 20 oct 2025 | **Modularización en TypeScript:** Concepto, Ventajas, Exportación e Importación de Módulos (Nombradas, por Defecto, Re-exportación), Módulos Internos vs Externos. |
 | **Clase 4**| mié, 22 oct 2025 | **Estructura de control de flujo, Genéricos y Type Assertions:** For In, For Of, Genéricos (Funciones, Clases, Interfaces), Type Assertions. |
 
-### Módulo: POO (Programación Orientada a Objetos)
+### Módulo 2: POO (Programación Orientada a Objetos)
 
 | Clase | Fecha | Temario |
 | :--- | :--- | :--- |
@@ -40,7 +40,7 @@ Para validar lo aprendido en este módulo, se realizará un desafío integrador 
 | **Clase 7** | lun, 3 nov 2025 | **Encapsulamiento y Polimorfismo:** Encapsulamiento (Getters y Setters). Polimorfismo (En tiempo de compilación y en tiempo de ejecución). |
 | **Clase 8** | mié, 5 nov 2025 | **Repaso:** Ejercicio práctico en vivo aplicando los 4 pilares de la POO. |
 
-### Módulo: Asincronía
+### Módulo 3: Asincronía
 
 | Clase | Fecha | Temario |
 | :--- | :--- | :--- |
@@ -48,7 +48,7 @@ Para validar lo aprendido en este módulo, se realizará un desafío integrador 
 | **Clase 10**| mié, 12 nov 2025 | **Promesas, Event Loop y Callback:** Hilo de Ejecución, Loop de Eventos, Callbacks y Callback Hell, Promesas (then, catch, finally). |
 | **Clase 11**| lun, 17 nov 2025 | **Async/Await y Try-catch:** Concurrencia y Paralelismo, Operaciones CPU-Bound vs I/O-Bound, Modelo de Javascript, Async/Await, Manejo de Errores con try/catch, Promise.all. |
 
-### Módulo: Express y Api Rest
+### Módulo 4: Express y Api Rest
 
 | Clase | Fecha | Temario |
 | :--- | :--- | :--- |
@@ -56,7 +56,7 @@ Para validar lo aprendido en este módulo, se realizará un desafío integrador 
 | **Clase 13** | mié, 26 nov 2025 | **Fetch, Routers, Postman:** Uso de Fetch para consumir APIs, Router Básico en Express, Introducción y uso de Postman. |
 | **Clase 14** | lun, 1 dic 2025 | **API REST, Middlewares, ZOD, CORS:** Conceptos de API REST, Middlewares en Express, Validación con Zod, CORS (Cross-Origin Resource Sharing). |
 
-### Módulo: Repaso y Profundización
+### Módulo 5: Repaso y Profundización
 
 | Clase | Fecha | Temario |
 | :--- | :--- | :--- |
@@ -68,7 +68,7 @@ Para validar lo aprendido en este módulo, se realizará un desafío integrador 
 | **Clase 20** | lun, 29 dic 2025 | **Repaso de Express, Postman, Seguridad y Buenas Prácticas (Parte 2):** Middlewares, Postman, Zod, CORS, Tokens (JWT), Sistema de logueo, Variables de entorno. |
 | **Clase 21** | lun, 5 ene 2026 | **Repasamos Deploy y Producción:** Integración de front y back. |
 
-### Módulo: Desafío Final
+### Módulo 6: Desafío Final
 
 | Clase | Fecha | Temario |
 | :--- | :--- | :--- |
