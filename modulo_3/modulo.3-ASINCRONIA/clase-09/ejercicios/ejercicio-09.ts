@@ -1,209 +1,109 @@
-// ### Ejercicio 9: Implementación de Pac-Man con Herencia y Polimorfismo
-// Crea un sistema que represente el juego Pac-Man utilizando clases. Define una clase `Personaje` que sirva como clase base para PacMan y Fantasma. Implementa métodos para moverse por el mapa y realizar acciones. Define una interfaz `EntidadMovible` que contenga el método `moverse`. Usa herencia para que Pac-Man y los fantasmas compartan el comportamiento de moverse y polimorfismo para que cada personaje pueda implementar su propio comportamiento de movimiento.
+// --- 1. Definiciones Básicas ---
 
+// La interfaz define el "contrato": cualquier entidad movible DEBE tener un método moverse.
 interface EntidadMovible {
 	moverse(): void;
 }
 
+// Un tipo para representar las coordenadas de forma clara.
 type Posicion = [number, number];
 
-enum Orientacion {
-	Arriba = 'arriba',
-	Abajo = 'abajo',
-	Izquierda = 'izquierda',
-	Derecha = 'derecha',
-}
+// --- 2. La Clase Base (Herencia) ---
 
+// La clase abstracta 'Personaje' sirve como plantilla para todos los personajes del juego.
+// Implementa la interfaz, obligando a todas sus clases hijas a ser 'EntidadMovible'.
 abstract class Personaje implements EntidadMovible {
-	constructor(
-		public nombre: string,
-		public posicion: Posicion,
-		protected velocidad: number,
-		protected direccion: Orientacion
-	) {}
+    // Atributos comunes a TODOS los personajes (posición y nombre).
+	constructor(public nombre: string, protected posicion: Posicion) {}
 
+    /**
+     * Este es el núcleo del POLIMORFISMO.
+     * 'abstract' significa que la clase base no define cómo funciona este método,
+     * pero OBLIGA a las clases hijas (PacMan, Fantasma) a crear su propia implementación.
+     */
 	abstract moverse(): void;
 
-	public mostrarPosicion(): void {
-		console.log(
-			`-> ${this.nombre} está en [${this.posicion[0]}, ${this.posicion[1]}]`
-		);
-	}
+    // Un método concreto que todas las clases hijas heredan y pueden usar.
+    public mostrarPosicion(): void {
+        console.log(`-> ${this.nombre} está en la posición [${this.posicion.join(', ')}].`);
+    }
 }
 
+// --- 3. Clases Hijas (Especialización y Polimorfismo) ---
+
+/**
+ * La clase PacMan hereda de Personaje.
+ * Obtiene automáticamente un 'nombre' y una 'posicion'.
+ */
 class PacMan extends Personaje {
-	constructor(
-		nombre: string,
-		posicion: Posicion,
-		velocidad: number,
-		direccion: Orientacion,
-		public vidas: number = 3
-	) {
-		super(nombre, posicion, velocidad, direccion);
+    // PacMan puede tener atributos propios, como las vidas.
+	constructor(nombre: string, posicion: Posicion, public vidas: number = 3) {
+		super(nombre, posicion); // Llama al constructor de la clase padre 'Personaje'.
 	}
+
+    /**
+     * Implementación POLIMÓRFICA de 'moverse'.
+     * El movimiento de PacMan es simple: se mueve un paso a la derecha.
+     */
 	moverse(): void {
-		switch (this.direccion) {
-			// Mover en el eje Y
-			case Orientacion.Arriba:
-				this.posicion[1] += this.velocidad;
-				break;
-			case Orientacion.Abajo:
-				this.posicion[1] -= this.velocidad;
-				break;
-			// Mover en el eje X
-			case Orientacion.Derecha:
-				this.posicion[0] += this.velocidad;
-				break;
-			case Orientacion.Izquierda:
-				this.posicion[0] -= this.velocidad;
-				break;
-		}
-		console.log(`PacMan se mueve hacia ${this.direccion}.`);
+		this.posicion[0] += 1; // Se mueve en el eje X.
+		console.log(`${this.nombre} avanza hacia la derecha.`);
 	}
 
-	public cambiarDireccion(nuevaDireccion: Orientacion): void {
-		this.direccion = nuevaDireccion;
-		console.log(`PacMan ahora se dirige hacia ${this.direccion}.`);
-	}
-
-	public perderVida(): void {
-		this.vidas--;
-		console.log(
-			`¡Auch! Pac-Man ha sido atrapado. Vidas restantes: ${this.vidas}`
-		);
-		if (this.vidas <= 0) {
-			console.log('--- GAME OVER ---');
-		}
-	}
-
-	comer(): void {}
+    // PacMan puede tener acciones propias.
+    public comerPunto(): void {
+        console.log(`${this.nombre} ha comido un punto.`);
+    }
 }
 
+/**
+ * La clase Fantasma también hereda de Personaje.
+ */
 class Fantasma extends Personaje {
-	constructor(
-		nombre: string,
-		posicion: Posicion,
-		velocidad: number,
-		direccion: Orientacion,
-		public estado: 'persiguiendo' | 'asustado' = 'persiguiendo'
-	) {
-		super(nombre, posicion, velocidad, direccion);
+    // Los fantasmas pueden tener su propio estado.
+	constructor(nombre: string, posicion: Posicion, public estado: 'persiguiendo' | 'asustado' = 'persiguiendo') {
+		super(nombre, posicion);
 	}
+
+    /**
+     * Implementación POLIMÓRFICA de 'moverse'.
+     * El comportamiento del Fantasma es diferente al de PacMan: se mueve un paso hacia arriba.
+     */
 	moverse(): void {
-		if (Math.random() < 0.25) {
-			const direcciones = Object.values(Orientacion);
-			const indiceAleatorio = Math.floor(
-				Math.random() * direcciones.length
-			);
-			this.direccion = direcciones[indiceAleatorio];
-			console.log(
-				`¡${this.nombre} cambió de dirección a ${this.direccion}!`
-			);
-		}
-
-		// El resto del movimiento es igual al de PacMan, podríamos incluso reutilizarlo.
-		switch (this.direccion) {
-			case Orientacion.Arriba:
-				this.posicion[1] += this.velocidad;
-				break;
-			case Orientacion.Abajo:
-				this.posicion[1] -= this.velocidad;
-				break;
-			case Orientacion.Derecha:
-				this.posicion[0] += this.velocidad;
-				break;
-			case Orientacion.Izquierda:
-				this.posicion[0] -= this.velocidad;
-				break;
-		}
+		this.posicion[1] += 1; // Se mueve en el eje Y.
+		console.log(`${this.nombre} flota hacia arriba.`);
 	}
-	perseguir(target: PacMan): void {}
+
+    // Los fantasmas pueden tener sus propias acciones.
+    public asustar(): void {
+        console.log(`¡${this.nombre} intenta asustar a Pac-Man!`);
+    }
 }
 
-class Juego {
-	private anchoTablero: number = 50;
-	private altoTablero: number = 50;
-	private pacman: PacMan;
-	private fantasmas: Fantasma[] = [];
-	private gameInterval: number | null = null; // Para poder detener el juego
 
-	constructor() {
-		this.pacman = new PacMan('Pac-Man', [0, 0], 2, Orientacion.Derecha);
-		this.fantasmas.push(
-			new Fantasma('Blinky', [10, 5], 1, Orientacion.Izquierda),
-			new Fantasma('Clyde', [25, 25], 1, Orientacion.Arriba)
-		);
-	}
+// --- 4. Demostración del Polimorfismo en Acción ---
 
-	// El bucle principal del juego
-	private _aplicarLimitesDelTablero(personaje: Personaje): void {
-		const [x, y] = personaje.posicion;
-		// Lógica de "túnel"
-		if (x > this.anchoTablero) personaje.posicion[0] = 0;
-		if (x < 0) personaje.posicion[0] = this.anchoTablero;
-		if (y > this.altoTablero) personaje.posicion[1] = 0;
-		if (y < 0) personaje.posicion[1] = this.altoTablero;
-	}
+// Creamos instancias de nuestras clases.
+const pacman = new PacMan("Pac-Man", [0, 0]);
+const blinky = new Fantasma("Blinky", [10, 5]);
+const clyde = new Fantasma("Clyde", [5, 10]);
 
-	private _verificarColisiones(): void {
-		const posPacman = this.pacman.posicion.map(Math.round);
+// Creamos un array de tipo 'Personaje'. Gracias a la herencia,
+// podemos guardar en él tanto a PacMan como a los Fantasmas.
+const personajesDelJuego: Personaje[] = [pacman, blinky, clyde];
 
-		for (const fantasma of this.fantasmas) {
-			const posFantasma = fantasma.posicion.map(Math.round);
+console.log("--- Estado Inicial ---");
+personajesDelJuego.forEach(p => p.mostrarPosicion());
 
-			if (
-				posPacman[0] === posFantasma[0] &&
-				posPacman[1] === posFantasma[1]
-			) {
-				this.pacman.perderVida();
-				if (this.pacman.vidas <= 0 && this.gameInterval) {
-					clearInterval(this.gameInterval);
-					this.gameInterval = null; // Buena práctica para limpiar la referencia
-				}
-			}
-		}
-	}
+console.log("\n--- ¡Comienza el Turno de Movimiento! ---");
 
-	private simularControlDelJugador(): void {
-		console.log(
-			'Simulación de control iniciada: Pac-Man cambiará de dirección automáticamente.'
-		);
-		setTimeout(() => this.pacman.cambiarDireccion(Orientacion.Abajo), 4000);
-		setTimeout(() => this.pacman.cambiarDireccion(Orientacion.Izquierda), 8000);
-		setTimeout(() => this.pacman.cambiarDireccion(Orientacion.Arriba), 12000);
-	}
+// La magia del polimorfismo:
+// Recorremos la lista y llamamos al MISMO método 'moverse()' en CADA personaje.
+// TypeScript sabe que, aunque todos son 'Personaje', cada uno ejecutará
+// SU PROPIA versión específica del método 'moverse'.
+personajesDelJuego.forEach(personaje => {
+    personaje.moverse();
+});
 
-	public iniciarJuego(): void {
-		console.log('--- ¡Comienza el Juego! ---');
-		this.simularControlDelJugador();
-
-		this.gameInterval = setInterval(() => {
-            // Si el juego ya terminó, no hagas nada.
-            if (!this.gameInterval || this.pacman.vidas <= 0) return;
-            
-            console.log("\n--- Nuevo Turno ---");
-            
-            this.pacman.moverse();
-            this._aplicarLimitesDelTablero(this.pacman);
-            this.pacman.mostrarPosicion();
-
-            for (const fantasma of this.fantasmas) {
-                fantasma.moverse();
-                this._aplicarLimitesDelTablero(fantasma);
-                fantasma.mostrarPosicion();
-            }
-            
-            this._verificarColisiones();
-
-        }, 2000);
-	}
-}
-
-const miJuego = new Juego();
-miJuego.iniciarJuego();
-// ubicacion de obstaculos
-// ubicacion de puntos
-// ubicacion de salida fantasmas -> centro -> coordenaas: [0,0]
-// metodos
-// eliminar fantasmas comidos por pacman en personajes
-// incrementar puntos del pacman
+console.log("\n--- Estado Final ---");
+personajesDelJuego.forEach(p => p.mostrarPosicion());
