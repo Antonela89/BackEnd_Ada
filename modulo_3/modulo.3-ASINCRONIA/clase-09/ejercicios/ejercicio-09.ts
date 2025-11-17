@@ -1,109 +1,128 @@
-// --- 1. Definiciones Básicas ---
+// ### Ejercicio 9: Implementación de Pac-Man con Herencia y Polimorfismo
+// Crea un sistema que represente el juego Pac-Man utilizando clases. Define una clase `Personaje` que sirva como clase base para PacMan y Fantasma. Implementa métodos para moverse por el mapa y realizar acciones. Define una interfaz `EntidadMovible` que contenga el método `moverse`. Usa herencia para que Pac-Man y los fantasmas compartan el comportamiento de moverse y polimorfismo para que cada personaje pueda implementar su propio comportamiento de movimiento.
 
-// La interfaz define el "contrato": cualquier entidad movible DEBE tener un método moverse.
+// --- Definiciones de Contratos y Tipos ---
+
+/**
+ * Definir el contrato para cualquier entidad capaz de moverse.
+ * Garantiza la existencia del método 'moverse'.
+ */
 interface EntidadMovible {
 	moverse(): void;
 }
 
-// Un tipo para representar las coordenadas de forma clara.
+// Utilizar una tupla para definir el tipo 'Posicion', asegurando una estructura bidimensional.
 type Posicion = [number, number];
 
-// --- 2. La Clase Base (Herencia) ---
 
-// La clase abstracta 'Personaje' sirve como plantilla para todos los personajes del juego.
-// Implementa la interfaz, obligando a todas sus clases hijas a ser 'EntidadMovible'.
+// --- Entidad Base ---
+
+/**
+ * Definir la clase base abstracta para todas las entidades del juego.
+ * Implementa 'EntidadMovible' para propagar el contrato a sus descendientes.
+ */
 abstract class Personaje implements EntidadMovible {
-    // Atributos comunes a TODOS los personajes (posición y nombre).
+    /**
+     * Inicializar las propiedades comunes a todos los personajes.
+     * @param nombre - Identificador de la instancia.
+     * @param posicion - Coordenadas iniciales en el mapa.
+     */
 	constructor(public nombre: string, protected posicion: Posicion) {}
 
     /**
-     * Este es el núcleo del POLIMORFISMO.
-     * 'abstract' significa que la clase base no define cómo funciona este método,
-     * pero OBLIGA a las clases hijas (PacMan, Fantasma) a crear su propia implementación.
+     * Declarar un método abstracto para el movimiento.
+     * Delega la implementación específica a las clases concretas (polimorfismo).
      */
 	abstract moverse(): void;
 
-    // Un método concreto que todas las clases hijas heredan y pueden usar.
+    /**
+     * Proveer una funcionalidad compartida y heredable para mostrar el estado de la posición.
+     */
     public mostrarPosicion(): void {
         console.log(`-> ${this.nombre} está en la posición [${this.posicion.join(', ')}].`);
     }
 }
 
-// --- 3. Clases Hijas (Especialización y Polimorfismo) ---
+
+// --- Clases Concretas ---
 
 /**
- * La clase PacMan hereda de Personaje.
- * Obtiene automáticamente un 'nombre' y una 'posicion'.
+ * Implementar la especialización 'PacMan' de 'Personaje'.
  */
 class PacMan extends Personaje {
-    // PacMan puede tener atributos propios, como las vidas.
+    /**
+     * @param nombre - Identificador.
+     * @param posicion - Coordenadas iniciales.
+     * @param vidas - Atributo específico de PacMan.
+     */
 	constructor(nombre: string, posicion: Posicion, public vidas: number = 3) {
-		super(nombre, posicion); // Llama al constructor de la clase padre 'Personaje'.
+		super(nombre, posicion); // Invocar el constructor de la clase padre.
 	}
 
     /**
-     * Implementación POLIMÓRFICA de 'moverse'.
-     * El movimiento de PacMan es simple: se mueve un paso a la derecha.
+     * Implementar la lógica de movimiento específica para PacMan.
+     * El movimiento se define como un desplazamiento positivo en el eje X.
      */
 	moverse(): void {
-		this.posicion[0] += 1; // Se mueve en el eje X.
+		this.posicion[0] += 1;
 		console.log(`${this.nombre} avanza hacia la derecha.`);
 	}
 
-    // PacMan puede tener acciones propias.
+    /**
+     * Definir una acción exclusiva de PacMan.
+     */
     public comerPunto(): void {
         console.log(`${this.nombre} ha comido un punto.`);
     }
 }
 
 /**
- * La clase Fantasma también hereda de Personaje.
+ * Implementar la especialización 'Fantasma' de 'Personaje'.
  */
 class Fantasma extends Personaje {
-    // Los fantasmas pueden tener su propio estado.
 	constructor(nombre: string, posicion: Posicion, public estado: 'persiguiendo' | 'asustado' = 'persiguiendo') {
 		super(nombre, posicion);
 	}
 
     /**
-     * Implementación POLIMÓRFICA de 'moverse'.
-     * El comportamiento del Fantasma es diferente al de PacMan: se mueve un paso hacia arriba.
+     * Implementar la lógica de movimiento específica para Fantasma.
+     * El comportamiento difiere del de PacMan, desplazándose en el eje Y.
      */
 	moverse(): void {
-		this.posicion[1] += 1; // Se mueve en el eje Y.
+		this.posicion[1] += 1;
 		console.log(`${this.nombre} flota hacia arriba.`);
 	}
 
-    // Los fantasmas pueden tener sus propias acciones.
+    /**
+     * Definir una acción exclusiva de Fantasma.
+     */
     public asustar(): void {
         console.log(`¡${this.nombre} intenta asustar a Pac-Man!`);
     }
 }
 
 
-// --- 4. Demostración del Polimorfismo en Acción ---
+// --- Demostración de Polimorfismo ---
 
-// Creamos instancias de nuestras clases.
+// Instanciar las clases concretas.
 const pacman = new PacMan("Pac-Man", [0, 0]);
 const blinky = new Fantasma("Blinky", [10, 5]);
 const clyde = new Fantasma("Clyde", [5, 10]);
 
-// Creamos un array de tipo 'Personaje'. Gracias a la herencia,
-// podemos guardar en él tanto a PacMan como a los Fantasmas.
+// Agrupar instancias heterogéneas en una colección homogénea gracias a la clase base común.
 const personajesDelJuego: Personaje[] = [pacman, blinky, clyde];
 
-console.log("--- Estado Inicial ---");
+console.log("--- Estado Inicial de Entidades ---");
 personajesDelJuego.forEach(p => p.mostrarPosicion());
 
-console.log("\n--- ¡Comienza el Turno de Movimiento! ---");
+console.log("\n--- Ejecutando Ciclo de Movimiento ---");
 
-// La magia del polimorfismo:
-// Recorremos la lista y llamamos al MISMO método 'moverse()' en CADA personaje.
-// TypeScript sabe que, aunque todos son 'Personaje', cada uno ejecutará
-// SU PROPIA versión específica del método 'moverse'.
+// Invocar el método 'moverse' en cada elemento de la colección.
+// En tiempo de ejecución, se resuelve la implementación correcta para cada tipo de objeto (PacMan o Fantasma),
+// demostrando así el comportamiento polimórfico.
 personajesDelJuego.forEach(personaje => {
     personaje.moverse();
 });
 
-console.log("\n--- Estado Final ---");
+console.log("\n--- Estado Final de Entidades ---");
 personajesDelJuego.forEach(p => p.mostrarPosicion());

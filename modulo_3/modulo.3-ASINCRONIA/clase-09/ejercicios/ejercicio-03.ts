@@ -4,7 +4,12 @@
 // *   Programar la renovación de la póliza utilizando `setTimeout()`.
 // *   Mostrar todas las pólizas activas.
 
-// Interfaz que define la estructura de una póliza
+// --- Definiciones de Contratos y Clases ---
+
+/**
+ * Definir el contrato de datos para una entidad de póliza.
+ * Garantizar una estructura consistente a través del sistema.
+ */
 interface Poliza {
 	id: number;
 	nombreCliente: string;
@@ -12,14 +17,22 @@ interface Poliza {
 	fechaRenovacion: Date;
 }
 
-// Clase dedicada a gestionar la colección de pólizas
+/**
+ * Orquestar el ciclo de vida de las pólizas.
+ * Encapsular el estado (la colección) y la lógica de negocio asociada.
+ */
 class GestionPolizas {
-    // La lista de pólizas es privada para que solo se pueda modificar a través de los métodos de la clase
+    // Mantener el estado de la colección de forma privada para garantizar la integridad.
 	private listaDePolizas: Poliza[] = [];
-    private proximoId: number = 1; // Para generar IDs únicos automáticamente
+    // Implementar un contador para la generación de identificadores únicos.
+    private proximoId: number = 1;
 
-    
-    // Añade una nueva póliza a la lista y programa su renovación.
+    /**
+     * Crear y registrar una nueva póliza, delegando su programación.
+     * @param nombreCliente - Identificador del titular.
+     * @param montoAsegurado - Valor de la cobertura.
+     * @param fechaRenovacion - Momento de vencimiento de la póliza.
+     */
     addPoliza(nombreCliente: string, montoAsegurado: number, fechaRenovacion: Date): void {
         const nuevaPoliza: Poliza = {
             id: this.proximoId++,
@@ -29,46 +42,43 @@ class GestionPolizas {
         };
         
         this.listaDePolizas.push(nuevaPoliza);
-        console.log(`Póliza ${nuevaPoliza.id} de ${nombreCliente} agregada. Se renovará el ${fechaRenovacion.toLocaleDateString()}.`);
+        console.log(`Póliza ${nuevaPoliza.id} ('${nombreCliente}') agregada. Vence: ${fechaRenovacion.toLocaleDateString()}.`);
         
-        // Una vez agregada, programamos su recordatorio de renovación
+        // Delegar la programación de la notificación como un efecto secundario.
         this.programarRenovacion(nuevaPoliza);
     }
 
-    
-    //Programa un recordatorio para la renovación de una póliza específica.
+    /**
+     * Implementar la lógica asíncrona para notificar sobre una renovación.
+     * @param poliza - La entidad de póliza a programar.
+     */
     private programarRenovacion(poliza: Poliza): void {
-        const ahora = new Date().getTime(); // Tiempo actual en milisegundos
-        const tiempoRenovacion = poliza.fechaRenovacion.getTime(); // Tiempo de renovación en milisegundos
-        
-        const tiempoRestante = tiempoRenovacion - ahora;
+        // Calcular el delta de tiempo hasta el vencimiento.
+        const ahora = Date.now();
+        const tiempoRestante = poliza.fechaRenovacion.getTime() - ahora;
 
-        // Solo programamos el timeout si la fecha de renovación es en el futuro
+        // Validar que la fecha sea futura para evitar programar eventos pasados.
         if (tiempoRestante > 0) {
-            console.log(` -> Renovación para la póliza ${poliza.id} programada en ${Math.ceil(tiempoRestante / 1000)} segundos.`);
-
+            console.log(` -> Alerta de renovación para póliza ${poliza.id} programada en ${Math.ceil(tiempoRestante / 1000)}s.`);
+            // Diferir la ejecución de la notificación hasta el momento del vencimiento.
             setTimeout(() => {
                 console.log(`\n** ALERTA DE RENOVACIÓN **`);
-                console.log(`La póliza #${poliza.id} del cliente ${poliza.nombreCliente} ha llegado a su fecha de renovación.`);
-                
-                // Opcional: Lógica para renovar automáticamente la póliza por un año más
-                // poliza.fechaRenovacion.setFullYear(poliza.fechaRenovacion.getFullYear() + 1);
-                // console.log(`La póliza ha sido renovada automáticamente. Nueva fecha: ${poliza.fechaRenovacion.toLocaleDateString()}`);
-
+                console.log(`La póliza #${poliza.id} del cliente ${poliza.nombreCliente} ha alcanzado su vencimiento.`);
             }, tiempoRestante);
         } else {
             console.log(` -> La fecha de renovación de la póliza ${poliza.id} ya ha pasado.`);
         }
     }
 
-
-    // Muestra todas las pólizas que todavía no han llegado a su fecha de renovación.
-
+    /**
+     * Derivar y mostrar el subconjunto de pólizas cuyo estado es 'activo'.
+     * El estado se calcula dinámicamente en tiempo de ejecución.
+     */
     mostrarActivas(): void {
         console.log("\n--- Reporte de Pólizas Activas ---");
         const ahora = new Date();
         
-        // Filtramos la lista para obtener solo las pólizas cuya fecha de renovación es posterior a la fecha actual
+        // Filtrar la colección basándose en una condición temporal.
         const polizasActivas = this.listaDePolizas.filter(
             (poliza) => poliza.fechaRenovacion > ahora
         );
@@ -78,7 +88,7 @@ class GestionPolizas {
             return;
         }
 
-        // Mostramos cada póliza activa
+        // Renderizar la vista filtrada.
         polizasActivas.forEach(poliza => {
             console.log(
                 `ID: ${poliza.id} | Cliente: ${poliza.nombreCliente} | Monto: $${poliza.montoAsegurado} | Vence: ${poliza.fechaRenovacion.toLocaleString()}`
@@ -86,7 +96,10 @@ class GestionPolizas {
         });
     }
 
-    // Muestra todas las pólizas, sin importar su estado.
+    /**
+     * Proveer una vista completa y sin filtrar de todo el portafolio.
+     * Útil para auditoría o depuración.
+     */
     mostrarTodas(): void {
         console.log("\n--- Inventario Total de Pólizas ---");
         if (this.listaDePolizas.length === 0) {
@@ -105,27 +118,24 @@ class GestionPolizas {
 
 // --- Casos de Uso ---
 
+// Instanciar el gestor de pólizas.
 const miAseguradora = new GestionPolizas();
 
-// Para ver el setTimeout en acción, creamos una fecha de renovación muy cercana (en 5 segundos)
-const fechaCercana = new Date(new Date().getTime() + 5000); 
+// Simular la creación de fechas para probar la lógica temporal.
+const fechaCercana = new Date(Date.now() + 5000); // Vence en 5 segundos.
+const fechaPasada = new Date(Date.now() - 86400000); // Venció ayer.
 
-// Y otra que ya pasó
-const fechaPasada = new Date(new Date().getTime() - 86400000); // ayer
-
+// Poblar el sistema con datos de prueba.
 miAseguradora.addPoliza("Juan Pérez", 50000, fechaCercana);
 miAseguradora.addPoliza("Ana Gómez", 120000, new Date("2025-12-01"));
 miAseguradora.addPoliza("Carlos Ruiz", 75000, fechaPasada);
 
-
-// Mostramos las pólizas que están activas actualmente
+// Verificar el estado inicial del sistema.
 miAseguradora.mostrarActivas();
-
-// Mostramos todas las pólizas, incluyendo las vencidas
 miAseguradora.mostrarTodas();
 
-// Después de unos 6 segundos, la póliza de Juan Pérez se "renovará" y el mensaje del setTimeout aparecerá en la consola.
-// También podemos volver a mostrar las pólizas activas para ver que la de Juan ya no aparece.
+// Programar una verificación asíncrona para confirmar el cambio de estado.
+// El delay debe ser mayor al de la póliza más cercana a vencer.
 setTimeout(() => {
     console.log("\n(Verificando estado después de 6 segundos...)");
     miAseguradora.mostrarActivas();

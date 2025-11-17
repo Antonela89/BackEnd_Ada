@@ -1,6 +1,12 @@
 // ### Ejercicio 11: Sistema de Reservas en una Peluquería con Herencia y Polimorfismo
 // Crea un sistema de reservas para una peluquería. Define una clase `Servicio` con atributos comunes como nombre, duracion, y precio. Luego, crea clases concretas para diferentes servicios como `CorteDeCabello` y `Manicura`. Implementa una clase `Cliente` y una clase `Reserva` que asocie clientes con servicios. Usa polimorfismo para permitir la reserva de cualquier tipo de servicio y encapsulamiento para gestionar la disponibilidad de horarios.
 
+// --- Definición del Servicio ---
+
+/**
+ * Definir la clase base abstracta para todos los servicios ofrecidos.
+ * Establece un contrato común para propiedades y comportamiento.
+ */
 abstract class Servicio {
 	constructor(
 		public nombre: string,
@@ -8,9 +14,15 @@ abstract class Servicio {
 		public precio: number
 	) {}
 
+	// Forzar a las clases hijas a implementar una forma de describir su oferta.
 	abstract describir(): void;
 }
 
+// --- Implementaciones Concretas (Especialización y Polimorfismo) ---
+
+/**
+ * Implementar la especialización 'CorteDeCabello'.
+ */
 class CorteDeCabello extends Servicio {
 	constructor(
 		duracionEnMinutos: number,
@@ -20,47 +32,64 @@ class CorteDeCabello extends Servicio {
 		super('Corte de Cabello', duracionEnMinutos, precio);
 	}
 
+	// Proveer la implementación específica del método abstracto.
 	describir(): void {
-		const conSinLavado = this.incluyeLavado ? 'con lavado' : 'sin lavado';
+		const detalle = this.incluyeLavado ? 'con lavado' : 'sin lavado';
 		console.log(
-			`- Servicio: ${this.nombre} (${conSinLavado}), Duración: ${this.duracionEnMinutos} min, Precio: $${this.precio}`
+			`- Servicio: ${this.nombre} (${detalle}), Duración: ${this.duracionEnMinutos} min, Precio: $${this.precio}`
 		);
 	}
 }
 
+/**
+ * Implementar la especialización 'Manicura'.
+ */
 class Manicura extends Servicio {
+	// Definir un tipo de unión para 'tipoEsmalte' para mejorar la seguridad de tipos.
 	constructor(
 		duracionEnMinutos: number,
 		precio: number,
-		public tipoEsmalte?: string
+		public tipoEsmalte?: 'normal' | 'permanente'
 	) {
 		super('Manicura', duracionEnMinutos, precio);
 	}
 
+	/**
+	 * Encapsular la lógica de cálculo de precios en un método privado.
+	 * Evita la mutación del precio base y promueve la reutilización.
+	 * @returns El precio final calculado.
+	 */
 	private getPrecioFinal(): number {
-		if (this.tipoEsmalte === 'permanente') {
-			return this.precio * 1.5; // Aumento del 50%
-		} else if (this.tipoEsmalte === 'normal') {
-			return this.precio * 1.2; // Aumento del 20%
-		}
-		return this.precio; // Precio base si no se especifica esmalte
+		if (this.tipoEsmalte === 'permanente') return this.precio * 1.5;
+		if (this.tipoEsmalte === 'normal') return this.precio * 1.2;
+		return this.precio;
 	}
 
 	describir(): void {
 		const precioFinal = this.getPrecioFinal();
-		const detalleEsmalte = this.tipoEsmalte
+		const detalle = this.tipoEsmalte
 			? `con esmalte ${this.tipoEsmalte}`
 			: 'sin esmalte';
 		console.log(
-			`- Servicio: ${this.nombre} (${detalleEsmalte}), Duración: ${this.duracionEnMinutos} min, Precio Final: $${precioFinal}`
+			`- Servicio: ${this.nombre} (${detalle}), Duración: ${this.duracionEnMinutos} min, Precio Final: $${precioFinal}`
 		);
 	}
 }
 
+// --- Clases de Entidades y Gestión ---
+
+/**
+ * Representar una entidad de Cliente.
+ * Actúa como un contenedor de datos.
+ */
 class Cliente {
 	constructor(public nombre: string, public telefono: string) {}
 }
 
+/**
+ * Representar una única entrada en la agenda.
+ * Calcula y almacena su propio intervalo de tiempo (inicio y fin).
+ */
 class Reserva {
 	public fechaFin: Date;
 
@@ -69,16 +98,28 @@ class Reserva {
 		public servicio: Servicio,
 		public fechaInicio: Date
 	) {
-		// Calcula la fecha de finalización de la reserva al momento de crearla.
+		// Derivar y cachear la fecha de finalización al instanciar.
 		this.fechaFin = new Date(
 			fechaInicio.getTime() + servicio.duracionEnMinutos * 60000
-		); // 60000 ms en un minuto
+		);
 	}
 }
 
+/**
+ * Orquestar la colección de reservas.
+ * Encapsula el estado de la agenda y la lógica de validación de horarios.
+ */
 class Agenda {
-	constructor(private _listaDeReservas: Reserva[] = []) {}
+	// Mantener la lista de reservas privada para controlar todas las mutaciones.
+	private _listaDeReservas: Reserva[] = [];
 
+	/**
+	 * Procesar una solicitud de reserva, aplicando la lógica de negocio para evitar conflictos.
+	 * @param cliente - La entidad Cliente que realiza la reserva.
+	 * @param servicio - La entidad Servicio a reservar.
+	 * @param fechaYHora - El momento de inicio solicitado para la reserva.
+	 * @returns Un booleano indicando si la operación fue exitosa.
+	 */
 	public crearReserva(
 		cliente: Cliente,
 		servicio: Servicio,
@@ -86,7 +127,7 @@ class Agenda {
 	): boolean {
 		const nuevaReserva = new Reserva(cliente, servicio, fechaYHora);
 
-		// Lógica de validación: comprobar si la nueva reserva se solapa con alguna existente.
+		// Implementar la lógica de detección de solapamiento de intervalos.
 		const hayConflicto = this._listaDeReservas.some(
 			(reservaExistente) =>
 				nuevaReserva.fechaInicio < reservaExistente.fechaFin &&
@@ -95,29 +136,32 @@ class Agenda {
 
 		if (hayConflicto) {
 			console.log(
-				`\n❌ Horario no disponible para '${
+				`\n❌ Conflicto de horario para '${
 					servicio.nombre
-				}' a las ${fechaYHora.toLocaleString()}. Por favor, elija otra hora.`
+				}' a las ${fechaYHora.toLocaleString()}.`
 			);
 			return false;
-		} else {
-			this._listaDeReservas.push(nuevaReserva);
-			console.log(
-				`\n✅ Reserva confirmada para ${cliente.nombre}: '${
-					servicio.nombre
-				}' el ${fechaYHora.toLocaleString()}.`
-			);
-			return true;
 		}
+
+		this._listaDeReservas.push(nuevaReserva);
+		console.log(
+			`\n✅ Reserva confirmada para ${cliente.nombre}: '${
+				servicio.nombre
+			}' el ${fechaYHora.toLocaleString()}.`
+		);
+		return true;
 	}
 
+	/**
+	 * Renderizar una vista cronológica del estado actual de la agenda.
+	 */
 	public mostrarReservas(): void {
-		console.log('\n--- Agenda de Reservas del Día ---');
+		console.log('\n--- Agenda de Reservas ---');
 		if (this._listaDeReservas.length === 0) {
-			console.log('No hay reservas en la agenda.');
+			console.log('La agenda está vacía.');
 			return;
 		}
-		// Ordenar las reservas por fecha de inicio para mostrarlas cronológicamente.
+		// Ordenar la colección antes de la renderización para asegurar el orden cronológico.
 		this._listaDeReservas.sort(
 			(a, b) => a.fechaInicio.getTime() - b.fechaInicio.getTime()
 		);
@@ -129,36 +173,44 @@ class Agenda {
 				} | De: ${reserva.fechaInicio.toLocaleTimeString()} a ${reserva.fechaFin.toLocaleTimeString()}`
 			);
 		});
-		console.log('---------------------------------');
+		console.log('--------------------------');
 	}
 }
 
-
 // --- Casos de Uso ---
 
-// 1. Crear clientes y servicios
-const clienteAna = new Cliente("Ana Gómez", "11-1234-5678");
-const clienteJuan = new Cliente("Juan Pérez", "11-8765-4321");
+const clienteAna = new Cliente('Ana Gómez', '11-1234-5678');
+const clienteJuan = new Cliente('Juan Pérez', '11-8765-4321');
 
+// Instanciar los tipos de servicio. Gracias al polimorfismo, todos son tratables como 'Servicio'.
 const corteBasico = new CorteDeCabello(45, 20, false);
 const corteConLavado = new CorteDeCabello(60, 30, true);
 const manicuraPermanente = new Manicura(50, 25, 'permanente');
 
-// 2. Crear y gestionar la agenda
 const miPeluqueria = new Agenda();
 
-// 3. Intentar crear reservas
-// Reserva exitosa
-miPeluqueria.crearReserva(clienteAna, corteConLavado, new Date("2025-11-20T10:00:00")); // De 10:00 a 11:00
+// Simular la operativa diaria.
+miPeluqueria.crearReserva(
+	clienteAna,
+	corteConLavado,
+	new Date('2025-11-20T10:00:00')
+);
+miPeluqueria.crearReserva(
+	clienteJuan,
+	corteBasico,
+	new Date('2025-11-20T11:00:00')
+);
+// Probar casos de fallo por conflicto de horario.
+miPeluqueria.crearReserva(
+	clienteJuan,
+	manicuraPermanente,
+	new Date('2025-11-20T10:30:00')
+);
+miPeluqueria.crearReserva(
+	clienteJuan,
+	corteBasico,
+	new Date('2025-11-20T09:30:00')
+);
 
-// Otra reserva exitosa que no se solapa
-miPeluqueria.crearReserva(clienteJuan, corteBasico, new Date("2025-11-20T11:00:00")); // De 11:00 a 11:45
-
-// Intento de reserva que FALLARÁ por solapamiento (empieza a las 10:30, durante la de Ana)
-miPeluqueria.crearReserva(clienteJuan, manicuraPermanente, new Date("2025-11-20T10:30:00")); 
-
-// Intento de reserva que FALLARÁ por solapamiento (empieza a las 9:30 y termina a las 10:15, durante la de Ana)
-miPeluqueria.crearReserva(clienteJuan, corteBasico, new Date("2025-11-20T09:30:00"));
-
-// 4. Mostrar el estado final de la agenda
+// Auditar el estado final de la agenda.
 miPeluqueria.mostrarReservas();
