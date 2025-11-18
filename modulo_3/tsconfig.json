@@ -7,11 +7,11 @@
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
     "module": "commonjs",
-    "target": "es2016",
+    "target": "es2021",
     "types": [],
     // For nodejs:
     "lib": [
-      "ES2017",
+      "ES2021",
       "DOM"
     ],
     // "types": ["node"],
