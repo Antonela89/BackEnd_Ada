@@ -18,7 +18,7 @@ Promise.all([promesa1, promesa2, promesa3])
     .then((resultados) => {
 	// Si todas las promesas se resuleven con exito, se ejecuta este bloque
 	console.log(`Resultado de todas las promesas: ${resultados}`);
-	// Los resultados van a aparecer ene l mismo orden de las promesas
+	// Los resultados van a aparecer en el mismo orden de las promesas
 })
     .catch((error) => {
         console.error(`Una de las promesas fue rechazada: ${error}`)
