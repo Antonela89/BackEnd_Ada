@@ -8,31 +8,54 @@
 
 // Este ejercicio es esencial para aprender a manejar errores en operaciones de autenticación, simulando problemas comunes que podrías encontrar en sistemas de login.
 
+/**
+ * Abstraer el servicio de Identidad y Acceso (IAM), encapsulando
+ * las reglas de validación y simulando la latencia de red asíncrona.
+ * @param {string} nombre - Credencial del usuario a verificar.
+ */
 async function autenticar(nombre) {
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
+			// Implementar "Cláusulas de Guarda" (Guard Clauses) para validar la integridad
+			// de los datos antes de procesar la lógica de negocio.
+
+			// Rechazar inmediatamente solicitudes con datos nulos o no definidos (Fail Fast)
 			if (nombre === null || nombre === undefined) {
 				reject('Error: El usuario no puede ser nulo o indefinido.');
 			} else if (nombre === '') {
+				// Rechazar cadenas vacías que no cumplen con la política de longitud mínima
 				reject('Error: El nombre de usuario no puede estar vacío.');
 			} else {
+				// Autorizar el acceso y emitir la confirmación tras superar los filtros de seguridad
 				resolve(`Usuario "${nombre}": Autenticación exitosa.`);
 			}
 		}, 2000);
 	});
 }
 
+/**
+ * Orquestar el flujo de inicio de sesión actuando como controlador
+ * entre la interfaz de usuario y la capa de servicios.
+ * @param {string} nombre - Input proporcionado por el cliente.
+ */
 async function iniciarSesion(nombre) {
 	try {
+		// Registrar el intento de acceso
 		console.log(`Iniciando sesión de ${nombre}...`);
 
+		// Delegar la verificación de credenciales al servicio autenticar()
+		// y suspender la ejecución hasta obtener el dictamen
 		const respuesta = await autenticar(nombre);
+		// Notificar el éxito de la operación al cliente
 		console.log('✅', respuesta);
 	} catch (error) {
+		// Centralizar el manejo de excepciones de seguridad para realizar
+        // un "Graceful Degradation" (degradación elegante) sin romper la aplicación
 		console.error('❌', error);
 	}
 }
 
-iniciarSesion('Mario ');
-iniciarSesion('');
-iniciarSesion(null);
+// Ejecutar pruebas de integración cubriendo el camino feliz (Happy Path) y casos borde (Edge Cases)
+iniciarSesion('Mario '); // Caso nominal
+iniciarSesion('');       // Caso de validación de formato
+iniciarSesion(null);     // Caso de validación de tipo/existencia

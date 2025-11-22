@@ -9,11 +9,13 @@
 // Esta simulación es muy útil para ver cómo manejar errores en operaciones de obtención de datos, una tarea común en programación backend.
 
 async function obtenerDatos() {
+	// Determinar de forma aleatoria el estado de éxito o fallo de la transacción simulada
 	const exito = Math.random() > 0.5;
 
-	// Creamos la promesa (la "operación" que tarda tiempo)
+	// Encapsular la lógica asíncrona definiendo los criterios de resolución y rechazo con retraso artificial
 	const promesaBusqueda = new Promise((resolve, reject) => {
 		setTimeout(() => {
+			// Evaluar la condición de éxito para finalizar el ciclo de vida de la promesa
 			if (exito) {
 				resolve('Datos obtenidos con éxito.');
 			} else {
@@ -22,10 +24,12 @@ async function obtenerDatos() {
 		}, 2000);
 	});
 
-	// Zona segura: intentamos esperar la respuesta
+	// Implementar un bloque de control de excepciones para gestionar el flujo asíncrono de manera segura
 	try {
+		// Notificar el inicio del proceso de recuperación de información
 		console.log('Buscando datos.... ');
 
+		// Suspender la ejecución local hasta obtener la resolución definitiva de la promesa
 		// Si la promesa se resuelve, guarda el texto en 'resultado'
 		// Si la promesa falla, salta inmediatamente al 'catch'
 		const resultado = await promesaBusqueda;
@@ -36,4 +40,5 @@ async function obtenerDatos() {
 	}
 }
 
+// Inicializar el servicio de consulta de datos
 obtenerDatos();
