@@ -5,3 +5,24 @@
 // *   Retornar el mensaje "Servidor listo" una vez que haya transcurrido el tiempo.
 
 // Este ejercicio te ayudará a entender cómo gestionar el tiempo en procesos asíncronos, fundamental cuando trabajamos con peticiones de red en el desarrollo web.
+
+function esperar(time) {
+	return new Promise((resolve) => setTimeout(resolve, time));
+}
+
+async function simulacionServidor() {
+	// Math.random() * 2000 da 0-2000, + 1000 da 1000-3000.
+	const tiempo = Math.floor(Math.random() * 2000) + 1000;
+
+	console.log(`Iniciando simulación... (Demora: ${tiempo}ms)`);
+
+	await esperar(tiempo);
+	return 'Servidor Listo';
+}
+
+async function ejecutar() {
+	const respuesta = await simulacionServidor();
+	console.log(respuesta); // Imprimirá "Servidor listo" después de la pausa
+}
+
+ejecutar();
