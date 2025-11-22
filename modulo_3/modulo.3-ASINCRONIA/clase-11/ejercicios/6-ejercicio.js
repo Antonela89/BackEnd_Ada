@@ -7,3 +7,32 @@
 // *   Utiliza `try/catch` en una función principal `iniciarSesion` para manejar los errores y mostrar un mensaje de éxito o error.
 
 // Este ejercicio es esencial para aprender a manejar errores en operaciones de autenticación, simulando problemas comunes que podrías encontrar en sistemas de login.
+
+async function autenticar(nombre) {
+	return new Promise((resolve, reject) => {
+		setTimeout(() => {
+			if (nombre === null || nombre === undefined) {
+				reject('Error: El usuario no puede ser nulo o indefinido.');
+			} else if (nombre === '') {
+				reject('Error: El nombre de usuario no puede estar vacío.');
+			} else {
+				resolve(`Usuario "${nombre}": Autenticación exitosa.`);
+			}
+		}, 2000);
+	});
+}
+
+async function iniciarSesion(nombre) {
+	try {
+		console.log(`Iniciando sesión de ${nombre}...`);
+
+		const respuesta = await autenticar(nombre);
+		console.log('✅', respuesta);
+	} catch (error) {
+		console.error('❌', error);
+	}
+}
+
+iniciarSesion('Mario ');
+iniciarSesion('');
+iniciarSesion(null);
