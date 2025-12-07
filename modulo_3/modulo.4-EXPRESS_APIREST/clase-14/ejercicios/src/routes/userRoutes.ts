@@ -1,4 +1,6 @@
+// importacion de Router de express
 import { Router } from 'express';
+// importacion de contorladores
 import {
 	getAllUser,
 	getUserById,
@@ -13,6 +15,7 @@ import {
 	getAllExternalUsers,
 	getExternalUserByName,
 } from '../controllers/userController';
+// importacion de middleware para validaciones
 import { validateId } from '../middlewares/idValidator';
 import {
 	validateUserBody,
