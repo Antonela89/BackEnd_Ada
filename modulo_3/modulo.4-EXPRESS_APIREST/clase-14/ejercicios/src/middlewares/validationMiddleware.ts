@@ -25,6 +25,31 @@ export const validateUserBody = (req: Request, res: Response, next: NextFunction
     next();
 };
 
+export const validateUsersArray = (req: Request, res: Response, next: NextFunction) => {
+    // 1. Definimos que esperamos un array de 'userSchema'
+    const arraySchema = z.array(userSchema);
+
+    // 2. Validamos el body completo
+    const result = arraySchema.safeParse(req.body);
+
+    if (!result.success) {
+        // 3. Formateamos el error para indicar QUÉ usuario falló (índice)
+        const detailedErrors = result.error.issues.map(e => ({
+            index: e.path[0], // Esto te dice la posición en el array (ej: 0, 1, 5)
+            field: e.path[1], // El campo que falló (ej: "email")
+            message: e.message
+        }));
+
+        res.status(400).json({ 
+            error: 'Uno o más usuarios del listado son inválidos', 
+            details: detailedErrors 
+        });
+        return;
+    }
+
+    next();
+};
+
 // Middleware para validar edición parcial (PUT)
 export const validateUserUpdate = (req: Request, res: Response, next: NextFunction) => {
     // .partial() hace que todos los campos sean opcionales, perfecto para PUT/PATCH
@@ -39,3 +64,4 @@ export const validateUserUpdate = (req: Request, res: Response, next: NextFuncti
     }
     next();
 };
+
