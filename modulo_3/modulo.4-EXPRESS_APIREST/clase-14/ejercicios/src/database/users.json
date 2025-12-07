@@ -1,8 +1,32 @@
 [
-    {
-        "id": 1,
-        "name": "Esteban",
-        "email": "esteban@example.com",
-        "age": 20
-    }
+  {
+    "id": 1,
+    "name": "Esteban",
+    "email": "esteban@example.com",
+    "age": 20
+  },
+  {
+    "name": "Laura Martínez",
+    "email": "laura.martinez@domain.com",
+    "age": 25,
+    "id": 2
+  },
+  {
+    "name": "Carlos López",
+    "email": "carlos.lopez@test.com",
+    "age": 30,
+    "id": 3
+  },
+  {
+    "name": "Ana García",
+    "email": "ana.garcia@domain.net",
+    "age": 22,
+    "id": 4
+  },
+  {
+    "name": "Roberto Diaz",
+    "email": "roberto.d@example.org",
+    "age": 45,
+    "id": 5
+  }
 ]
