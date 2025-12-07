@@ -18,7 +18,12 @@ export const getAllExternalUsers = async () => {
 export const getExternalUserByName = async (name: string) => {
 	const allUser = await getAllExternalUsers();
 
-	const user = allUser.find((u: any) => u.name === name);
+	const nameClean = name.trim().toLowerCase();
+
+	const user = allUser.find((u: any) => {
+        const userNameClean = u.name.toLowerCase();
+        return userNameClean === nameClean;
+    });
 
 	return user;
 };
