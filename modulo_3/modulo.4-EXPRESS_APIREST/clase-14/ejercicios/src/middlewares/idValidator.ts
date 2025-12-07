@@ -1,5 +1,7 @@
+// importamos los tipos de express
 import { Request, Response, NextFunction } from 'express';
 
+// middleware para verificar el id
 export const validateId = (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
 
