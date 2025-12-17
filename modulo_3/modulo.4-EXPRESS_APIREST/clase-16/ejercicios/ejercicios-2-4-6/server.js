@@ -1,6 +1,7 @@
 // importacion de modulos necesarios
 const fs = require('fs');
-const express = require('express') ;
+const express = require('express');
+const z = require('zod');
 
 // Ruta al archivo json que simula la BBDD
 const pathFile = './database.json';
@@ -8,8 +9,36 @@ const pathFile = './database.json';
 // configuracion de puerto
 const PORT = 3000;
 
+// Ejercicio 5
+// Validación de los datos ingresados por usuario
+// Esquema de validacion
+const productSchema = z.object({
+    id: z.number('El id debe ser númerico.'),
+    name: z.string().nonempty("La cadena no puede estar vacía.")
+});
+
+// funcion de validacion
+const validateProductBody = (req, res, next) => {
+    const results = productSchema.safeParse(req.body);
+
+    // verificacion
+    if (!results.success) {
+        // Si falla, enviamos los detalles del error formateados
+        res.status(400).json({ 
+            error: 'Datos inválidos', 
+            details: results.error.issues.map(e => e.message) 
+        });
+        return; // corta ejecucion
+    }
+
+    // Si todo ok, seguimos
+    next();
+};
+
 // instancia de express
 const app = express();
+
+// Ejercicio 6
 // middleware para formateo de respuesta
 app.use(express.json());
 
@@ -19,7 +48,7 @@ app.get('/', (req, res) => {
 });
 
 // Rutas de peticiones
-
+//----------------------------------------------------------------------
 // Ejercicio 4
 app.patch('/products/:id', (req, res) => {
     const { id } = req.params;
@@ -78,16 +107,39 @@ app.get('/products/', (req, res) => {
     res.status(200).json(products)
 });
 
-// POST -> Crear un nuevo usuario
-app.post('/products/', (req, res) => {
+// POST -> Crear un nuevo producto sin 
+// app.post('/products/', (req, res) => {
+//     // desestructuracion de nombre que vienen en el body de la petición
+//     // id -> logica autoincremental
+//     const { id, name } = req.body
+
+//      // verifiacion para que los campos no esten vacios
+//     if (!id || !name) {
+//         return res.status(400).json({error: 'El usuario no ingreso los campos requeridos.' })
+//     }
+
+//     // Leer la base de datos 
+//     const BBDD = JSON.parse(fs.readFileSync(pathFile));
+
+//     // Armar el objeto producto a cargar
+//     const newProducts = { id, name};
+
+//     // agregar a la lista de la BBDD
+//     BBDD.push(newProducts);
+
+//     // guardar lista actualizada
+//     fs.writeFileSync(pathFile, JSON.stringify(BBDD, null, 2));
+
+//     res.status(201).json({message: 'Producto creado exitosamente.'})
+// });
+
+//-------------------------------------------------------------
+// Ejercicio 6 - continuación
+// POST -> Crear un nuevo productov con middleware de validacion
+app.post('/products/', validateProductBody, (req, res) => {
     // desestructuracion de nombre que vienen en el body de la petición
     // id -> logica autoincremental
     const { id, name } = req.body
-
-     // verifiacion para que los campos no esten vacios
-    if (!id || !name) {
-        return res.status(400).json({error: 'El usuario no ingreso los campos requeridos.' })
-    }
 
     // Leer la base de datos 
     const BBDD = JSON.parse(fs.readFileSync(pathFile));
@@ -103,8 +155,6 @@ app.post('/products/', (req, res) => {
 
     res.status(201).json({message: 'Producto creado exitosamente.'})
 });
-
-//-------------------------------------------------------------
 
 
 app.listen(PORT, () => {
