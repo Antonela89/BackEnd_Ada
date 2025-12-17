@@ -20,7 +20,50 @@ app.get('/', (req, res) => {
 
 // Rutas de peticiones
 
-// Ejercicio 1
+// Ejercicio 4
+app.patch('/products/:id', (req, res) => {
+    const { id } = req.params;
+
+    const products = JSON.parse(fs.readFileSync(pathFile));
+
+    const indexProduct = products.findIndex((product) => product.id === parseInt(id));
+
+    if (indexProduct === -1) {
+        res.status(404).json({ error: 'Usuario no encontrado.' });
+    }
+
+    const currentProduct = products[indexProduct];
+
+    const mergeProducts = {...currentProduct, ...req.body};
+
+    products[indexProduct] = mergeProducts;
+
+    fs.writeFileSync(pathFile, JSON.stringify(products, null, 2));
+
+    res.status(200).json({ message: `Usuario - ${id} editado exitosamente.` });
+});
+
+app.delete('/products/:id', (req, res) => {
+    const { id } = req.params;
+    
+    const products = JSON.parse(fs.readFileSync(pathFile));
+
+    const indexProduct = products.findIndex((product) => product.id === parseInt(id));
+
+    if (indexProduct === -1) {
+        res.status(404).json({ error: 'Usuario no encontrado.' });
+    }
+
+    products.splice(indexProduct, 1);
+    
+    fs.writeFileSync(pathFile, JSON.stringify(products, null, 2));
+
+    res.status(200).json({ message: `Usuario - ${id} eliminado exitosamente.` });
+});
+
+//-------------------------------------------------------------
+
+// Ejercicio 2
 // GET -> Traer todos los usuarios
 app.get('/products/', (req, res) => {
     // leer el archivo y guardarlo en una variable
@@ -60,8 +103,9 @@ app.post('/products/', (req, res) => {
 
     res.status(201).json({message: 'Usuario creado exitosamente.'})
 });
+
 //-------------------------------------------------------------
-// Ejercicio 3
+
 
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en http://localhost:${PORT}`);
