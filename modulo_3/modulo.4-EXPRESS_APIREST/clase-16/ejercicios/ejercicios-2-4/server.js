@@ -29,7 +29,7 @@ app.patch('/products/:id', (req, res) => {
     const indexProduct = products.findIndex((product) => product.id === parseInt(id));
 
     if (indexProduct === -1) {
-        res.status(404).json({ error: 'Usuario no encontrado.' });
+        res.status(404).json({ error: 'Producto no encontrado.' });
     }
 
     const currentProduct = products[indexProduct];
@@ -40,7 +40,7 @@ app.patch('/products/:id', (req, res) => {
 
     fs.writeFileSync(pathFile, JSON.stringify(products, null, 2));
 
-    res.status(200).json({ message: `Usuario - ${id} editado exitosamente.` });
+    res.status(200).json({ message: `Producto - ${id} editado exitosamente.` });
 });
 
 app.delete('/products/:id', (req, res) => {
@@ -51,14 +51,14 @@ app.delete('/products/:id', (req, res) => {
     const indexProduct = products.findIndex((product) => product.id === parseInt(id));
 
     if (indexProduct === -1) {
-        res.status(404).json({ error: 'Usuario no encontrado.' });
+        res.status(404).json({ error: 'Producto no encontrado.' });
     }
 
     products.splice(indexProduct, 1);
     
     fs.writeFileSync(pathFile, JSON.stringify(products, null, 2));
 
-    res.status(200).json({ message: `Usuario - ${id} eliminado exitosamente.` });
+    res.status(200).json({ message: `Producto - ${id} eliminado exitosamente.` });
 });
 
 //-------------------------------------------------------------
@@ -101,7 +101,7 @@ app.post('/products/', (req, res) => {
     // guardar lista actualizada
     fs.writeFileSync(pathFile, JSON.stringify(BBDD, null, 2));
 
-    res.status(201).json({message: 'Usuario creado exitosamente.'})
+    res.status(201).json({message: 'Producto creado exitosamente.'})
 });
 
 //-------------------------------------------------------------

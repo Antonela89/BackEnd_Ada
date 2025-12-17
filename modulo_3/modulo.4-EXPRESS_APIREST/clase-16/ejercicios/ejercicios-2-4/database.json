@@ -5,14 +5,10 @@
   },
   {
     "id": 2,
-    "name": "Teclado"
+    "name": "Teclado inalámbrico"
   },
   {
     "id": 3,
     "name": "Mouse"
-  },
-  {
-    "id": 4,
-    "name": "Monitor"
   }
 ]
