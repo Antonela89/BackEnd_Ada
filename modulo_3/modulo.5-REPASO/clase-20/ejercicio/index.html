@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ej 3 - Problemas de Cors</title>
+</head>
+<body>
+    <section id="products">
+
+    </section>
+</body>
+
+<script>
+    const $container = document.getElementById('products');
+
+    const getProducts = async () => {
+        try {
+            const response = await fetch('http://localhost:3000/productos');
+            const productos = await response.json();
+            
+            if(!productos || productos.length === 0) return console.log('No hay productos');
+        
+            productos.forEach(e => {
+                const card = `<article>
+                        <h2>${e.name}</h2>
+                        <p>${e.price}</p>
+                    </article>`
+
+                    $container.innerHTML += card;
+            });
+        } catch (error) {
+            $container.innerHTML = `<p>${error}</p>`
+        }
+    }
+
+    getProducts()
+</script>
+</html>
