@@ -42,11 +42,11 @@ const createBook = (req, res) => {
 
 //PATCH
 const updateBook = (req, res) => {
-	const books = readBooks();
+	let books = readBooks();
 
 	const index = books.findIndex((b) => b.id === parseInt(req.params.id));
 
-	if ((index = -1)) {
+	if (index === -1) {
 		res.status(404).json({ error: 'Libro no encontrado' });
 	}
 
