@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gestor de Tareas</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>📝 Mis Tareas</h1>
+
+        <div class="card-form">
+            <input type="text" id="taskTitle" placeholder="¿Qué hay que hacer?">
+            <textarea id="taskDesc" placeholder="Descripción (opcional)" rows="2"></textarea>
+            <button class="btn-add" onclick="addTask()">Agregar Tarea</button>
+        </div>
+
+        <div id="taskList">
+            <!-- Las tareas aparecerán aquí -->
+        </div>
+    </div>
+
+    <script src="./scripts.js"></script>
+</body>
+
+</html>

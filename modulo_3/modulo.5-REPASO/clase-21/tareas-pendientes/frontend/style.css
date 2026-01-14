@@ -1,0 +1,133 @@
+:root {
+    --primary: #6366f1;
+    --primary-hover: #4f46e5;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --text: #1e293b;
+    --danger: #ef4444;
+    --success: #22c55e;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+}
+
+h1 {
+    text-align: center;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* Formulario */
+.card-form {
+    background: var(--card);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-bottom: 25px;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+input:focus {
+    border-color: var(--primary);
+}
+
+button.btn-add {
+    width: 100%;
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button.btn-add:hover {
+    background: var(--primary-hover);
+}
+
+/* Lista de Tareas */
+.task-item {
+    background: var(--card);
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
+}
+
+.task-item:hover {
+    transform: translateY(-2px);
+}
+
+.task-info {
+    flex-grow: 1;
+}
+
+.task-info.completed span {
+    text-decoration: line-through;
+    color: #94a3b8;
+}
+
+.task-title {
+    display: block;
+    font-weight: 600;
+}
+
+.task-desc {
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.btn-delete {
+    background: #fee2e2;
+    color: var(--danger);
+    border: none;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Checkbox personalizado */
+.check-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.check-btn.done {
+    background: var(--success);
+    border-color: var(--success);
+    color: white;
+}
