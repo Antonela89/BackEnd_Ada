@@ -10,7 +10,7 @@ const getAllBooks = (req, res) => {
 const getById = (req, res) => {
 	const books = readBooks();
 
-	const book = books.find((b) => b.id === req.params.id);
+	const book = books.find((b) => b.id === parseInt(req.params.id));
 
 	if (!book) {
 		return res
@@ -44,7 +44,7 @@ const createBook = (req, res) => {
 const updateBook = (req, res) => {
 	const books = readBooks();
 
-	const index = books.findIndex((b) => b.id === req.params.id);
+	const index = books.findIndex((b) => b.id === parseInt(req.params.id));
 
 	if ((index = -1)) {
 		res.status(404).json({ error: 'Libro no encontrado' });
@@ -61,7 +61,7 @@ const updateBook = (req, res) => {
 const deleteBook = (req, res) => {
 	const books = readBooks();
 
-	const filteredBoks = books.filter((b = b.id !== req.params.id));
+	const filteredBoks = books.filter((b => b.id !== parseInt(req.params.id)));
 
 	writeBooks(filteredBoks);
 	res.status(200).json({
