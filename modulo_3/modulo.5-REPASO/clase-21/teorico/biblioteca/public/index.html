@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Biblioteca</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+<main class="container">
+    <h1>📚 Gestión de Biblioteca</h1>
+
+    <!-- Formulario para agregar/editar -->
+    <form id="bookForm" class="form-group">
+        <input type="hidden" id="bookId">
+        <input type="text" id="title" placeholder="Título del libro" required class="full-width">
+        <input type="text" id="author" placeholder="Autor" required>
+        <input type="text" id="genre" placeholder="Género" required>
+        <button id="btnSave" class="btn-add">Agregar Libro</button>
+    </form>
+
+    <!-- Tabla de Libros -->
+    <table>
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Género</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="bookList">
+            <!-- Los libros se cargarán aquí dinámicamente -->
+        </tbody>
+    </table>
+</main>
+
+<script src="./scripts.js"></script>
+</body>
+</html>
