@@ -1,12 +1,12 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { connectDB } from './connectDB.js';
+import { connectDB } from './connectDB.mjs';
 
 dotenv.config();
 
 // Importar rutas
-const userRoutes = await import('./routes/userRoutes.js');
+const userRoutes = await import('./routes/user-routes.mjs');
 
 // Esperar a que la conexión a la base de datos se establezca
 await connectDB(); 
