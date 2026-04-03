@@ -4,7 +4,7 @@ import user from "../models/user-model.mjs";
 const router = Express.Router();
 
 // Ruta para crear un nuevo usuario
-router.post('/users', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const newUser = new user(req.body);
         const savedUser = await newUser.save();
@@ -15,7 +15,7 @@ router.post('/users', async (req, res) => {
 });
 
 // Ruta para obtener todos los usuarios
-router.get('/users', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const users = await user.find();
         res.status(200).json(users);
@@ -25,7 +25,7 @@ router.get('/users', async (req, res) => {
 }); 
 
 // Ruta para obtener un usuario por su ID
-router.get('/users/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const userId = req.params.id;
         const foundUser = await user.findById(userId);  
@@ -39,7 +39,7 @@ router.get('/users/:id', async (req, res) => {
 });
 
 // Ruta para actualizar un usuario por su ID
-router.put('/users/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
         const userId = req.params.id;
         const updatedUser = await user.findByIdAndUpdate(userId, req.body, { new: true });
@@ -53,7 +53,7 @@ router.put('/users/:id', async (req, res) => {
 });
 
 // Ruta para eliminar un usuario por su ID  
-router.delete('/users/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
         const userId = req.params.id;
         const deletedUser = await user.findByIdAndDelete(userId);
