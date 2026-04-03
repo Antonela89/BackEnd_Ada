@@ -28,7 +28,7 @@ citaRoutes.get('/', async (req, res) => {
 citaRoutes.get('/:id', async (req, res) => {
     try {
         const citaId = req.params.id;
-        const foundCita = await cita.findById(citaId).populate('cliente').populate('servicio');
+        const foundCita = await cita.findById(citaId).populate('cliente');
         if (!foundCita) {
             return res.status(404).json({ message: "Cita no encontrada" });
         }
