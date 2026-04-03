@@ -12,9 +12,9 @@ export const connectDB = async () => {
 		await mongoose.connect(process.env.MONGO_URI, {
             // opciones de conexión recomendadas para evitar advertencias de deprecación
             // useNewUrlParser es una opción que permite a Mongoose usar el nuevo analizador de URL de MongoDB, lo que mejora la compatibilidad con las nuevas características de MongoDB
-            useNewUrlParser: true,
+            // useNewUrlParser: true,
             // useUnifiedTopology es una opción que permite a Mongoose usar el nuevo motor de monitoreo de MongoDB, lo que mejora la estabilidad de la conexión
-            useUnifiedTopology: true,
+            // useUnifiedTopology: true,
         });
         // si la conexión es exitosa mostrar un mensaje y continuar con el resto de la aplicación
 		console.log('Conexión a la base de datos exitosa');
