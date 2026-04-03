@@ -2,11 +2,9 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { connectDB } from './connectDB.mjs';
+import router from './routes/user-routes.mjs';
 
 dotenv.config();
-
-// Importar rutas
-const userRoutes = await import('./routes/user-routes.mjs');
 
 // Esperar a que la conexión a la base de datos se establezca
 await connectDB(); 
@@ -30,7 +28,7 @@ app.get('/', (req, res) => {
 });
 
 // Usar las rutas de usuarios
-app.use('/api/users', userRoutes);
+app.use('/api/users', router);
 
 // Iniciar el servidor
 app.listen(PORT, () => {
