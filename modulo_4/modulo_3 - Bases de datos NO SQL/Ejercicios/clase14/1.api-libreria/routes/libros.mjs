@@ -5,7 +5,7 @@ const LibrosRouter = express.Router();
 
 LibrosRouter.get('/', async (req, res) => {
     try {  
-        const libros = await Libro.find();
+        const libros = await Libro.find().populate('autor');
         res.json(libros);
     } catch (error) {
         res.status(500).json({ error: 'Error al obtener los libros' });
