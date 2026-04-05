@@ -1,6 +1,6 @@
 import express from 'express';
 import Mascota from '../models/Mascota.mjs';
-import Cliente from '../models/Cliente.mjs';
+import mongoose from 'mongoose';
 
 const MascotaRouter = express.Router();
 MascotaRouter.get('/', async (req, res) => {

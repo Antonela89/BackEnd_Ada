@@ -47,7 +47,7 @@ ClienteRouter.delete('/:id', async (req, res) => {
 		if (!cliente)
 			return res.status(404).json({ message: 'Cliente no encontrado' });
 
-		res.json({ message: 'Cliente eliminado correctamente' });
+		res.json({ message: 'Cliente y sus mascotas eliminados correctamente' });
 	} catch (error) {
 		res.status(500).json({ message: error.message });
 	}
