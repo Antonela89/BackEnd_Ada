@@ -7,13 +7,13 @@ const clienteSchema = new mongoose.Schema({
 	direccion: { type: String },
 });
 
-clienteSchema.pre('findOneAndDelete', async function (next) {
+clienteSchema.pre('findOneAndDelete', async function () {
 	try {
 		const clienteId = this.getQuery()['_id'];
+		console.log('Eliminando mascotas del dueño:', clienteId);
 		await Mascota.deleteMany({ duenio: clienteId });
-		next();
 	} catch (error) {
-		next(error);
+		console.error('Error en cascada:', error);
 	}
 });
 
