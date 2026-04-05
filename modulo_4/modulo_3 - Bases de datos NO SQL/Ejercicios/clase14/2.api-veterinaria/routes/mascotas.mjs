@@ -1,5 +1,6 @@
 import express from 'express';
 import Mascota from '../models/Mascota.mjs';
+import Cliente from '../models/Cliente.mjs';
 
 const MascotaRouter = express.Router();
 MascotaRouter.get('/', async (req, res) => {
@@ -12,13 +13,22 @@ MascotaRouter.get('/', async (req, res) => {
 });
 
 MascotaRouter.post('/', async (req, res) => {
+	const { nombre, especie, raza, edad, duenio } = req.body;
+
+	if (!mongoose.Types.ObjectId.isValid(duenio)) {
+		return res
+			.status(400)
+			.json({ message: 'El ID del dueño no es válido' });
+	}
+
 	const mascota = new Mascota({
-		nombre: req.body.nombre,
-		especie: req.body.especie,
-		raza: req.body.raza,
-		edad: req.body.edad,
-		duenio: req.body.duenio,
+		nombre,
+		especie,
+		raza,
+		edad,
+		duenio,
 	});
+
 	try {
 		const nuevaMascota = await mascota.save();
 		res.status(201).json(nuevaMascota);
