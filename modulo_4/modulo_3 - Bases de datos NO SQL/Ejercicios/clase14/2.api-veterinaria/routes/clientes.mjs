@@ -43,9 +43,11 @@ ClienteRouter.put('/:id', async (req, res) => {
 
 ClienteRouter.delete('/:id', async (req, res) => {
 	try {
-		const cliente = await Cliente.findById(req.params.id);
+		const cliente = await Cliente.findByIdAndDelete(req.params.id); // Corregido: Eliminar
 		if (!cliente)
 			return res.status(404).json({ message: 'Cliente no encontrado' });
+
+		res.json({ message: 'Cliente eliminado correctamente' });
 	} catch (error) {
 		res.status(500).json({ message: error.message });
 	}
