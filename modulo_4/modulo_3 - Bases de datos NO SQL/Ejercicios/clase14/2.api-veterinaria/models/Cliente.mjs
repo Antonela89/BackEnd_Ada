@@ -8,13 +8,13 @@ const clienteSchema = new mongoose.Schema({
 });
 
 clienteSchema.pre('findOneAndDelete', async function () {
-	try {
-		const clienteId = this.getQuery()['_id'];
-		console.log('Eliminando mascotas del dueño:', clienteId);
-		await Mascota.deleteMany({ duenio: clienteId });
-	} catch (error) {
-		console.error('Error en cascada:', error);
-	}
+    const filter = this.getQuery(); 
+    const clienteId = filter._id;
+
+    const Mascota = mongoose.model('Mascota'); 
+    
+    console.log('Eliminando mascotas del dueño:', clienteId);
+    await Mascota.deleteMany({ duenio: clienteId });
 });
 
 const Cliente = mongoose.model('Cliente', clienteSchema);

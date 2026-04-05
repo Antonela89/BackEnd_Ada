@@ -14,12 +14,20 @@ MascotaRouter.get('/', async (req, res) => {
 });
 
 MascotaRouter.post('/', async (req, res) => {
+	console.log('Datos recibidos:', req.body); 
+
 	const { nombre, especie, raza, edad, duenio } = req.body;
 
-	if (!duenio || !mongoose.Types.ObjectId.isValid(duenio)) {
+	if (!duenio) {
 		return res
 			.status(400)
-			.json({ message: 'El ID del dueño no es válido o no fue enviado' });
+			.json({ message: 'El campo "duenio" es obligatorio' });
+	}
+
+	if (!mongoose.Types.ObjectId.isValid(duenio)) {
+		return res
+			.status(400)
+			.json({ message: 'El formato del ID del dueño es inválido' });
 	}
 
 	try {
@@ -27,20 +35,10 @@ MascotaRouter.post('/', async (req, res) => {
 		if (!clienteExiste) {
 			return res
 				.status(404)
-				.json({
-					message:
-						'Error: El dueño (Cliente) especificado no existe en la base de datos',
-				});
+				.json({ message: 'El dueño no existe en la base de datos' });
 		}
 
-		const mascota = new Mascota({
-			nombre,
-			especie,
-			raza,
-			edad,
-			duenio,
-		});
-
+		const mascota = new Mascota({ nombre, especie, raza, edad, duenio });
 		const nuevaMascota = await mascota.save();
 		res.status(201).json(nuevaMascota);
 	} catch (error) {
