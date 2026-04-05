@@ -1,5 +1,6 @@
 import express from 'express';
 import Mascota from '../models/Mascota.mjs';
+import Cliente from '../models/Cliente.mjs';
 import mongoose from 'mongoose';
 
 const MascotaRouter = express.Router();
@@ -15,21 +16,31 @@ MascotaRouter.get('/', async (req, res) => {
 MascotaRouter.post('/', async (req, res) => {
 	const { nombre, especie, raza, edad, duenio } = req.body;
 
-	if (!mongoose.Types.ObjectId.isValid(duenio)) {
+	if (!duenio || !mongoose.Types.ObjectId.isValid(duenio)) {
 		return res
 			.status(400)
-			.json({ message: 'El ID del dueño no es válido' });
+			.json({ message: 'El ID del dueño no es válido o no fue enviado' });
 	}
 
-	const mascota = new Mascota({
-		nombre,
-		especie,
-		raza,
-		edad,
-		duenio,
-	});
-
 	try {
+		const clienteExiste = await Cliente.findById(duenio);
+		if (!clienteExiste) {
+			return res
+				.status(404)
+				.json({
+					message:
+						'Error: El dueño (Cliente) especificado no existe en la base de datos',
+				});
+		}
+
+		const mascota = new Mascota({
+			nombre,
+			especie,
+			raza,
+			edad,
+			duenio,
+		});
+
 		const nuevaMascota = await mascota.save();
 		res.status(201).json(nuevaMascota);
 	} catch (error) {
