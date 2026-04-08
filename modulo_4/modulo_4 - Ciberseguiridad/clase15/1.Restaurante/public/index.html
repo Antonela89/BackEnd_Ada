@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurante API - Seguridad</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="api-header">
+            <h1>🛡️ Restaurante API - Gestión Segura</h1>
+            <p>Arquitectura Defensiva con Node.js y MongoDB Atlas</p>
+        </header>
+
+        <section class="security-grid">
+            <div class="security-card">
+                <strong>🔒 CORS & Helmet</strong>
+                Configuración de cabeceras y control de acceso cruzado.
+            </div>
+            <div class="security-card">
+                <strong>⚙️ Zod Validation</strong>
+                Sanitización estricta de datos en cada petición.
+            </div>
+            <div class="security-card">
+                <strong>🆔 ID Middleware</strong>
+                Validación de integridad de ObjectIDs.
+            </div>
+            <div class="security-card">
+                <strong>🗝️ Env Secrets</strong>
+                Credenciales protegidas en entorno seguro.
+            </div>
+        </section>
+        <section>
+            <h2 class="titleTable">Documentación de Endpoints</h2>
+            <table class="endpoint-table">
+                <thead>
+                    <tr>
+                        <th>Módulo</th>
+                        <th>Método</th>
+                        <th>Endpoint</th>
+                        <th>Acción Segura</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="module-header">
+                        <td colspan="4">🍴 GESTIÓN DE PLATOS</td>
+                    </tr>
+                    <tr>
+                        <td>Platos</td>
+                        <td><span class="method get">GET</span></td>
+                        <td><code>/api/platos</code></td>
+                        <td>Listar todos los platos disponibles.</td>
+                    </tr>
+                    <tr>
+                        <td>Platos</td>
+                        <td><span class="method get">GET</span></td>
+                        <td><code>/api/platos/id</code></td>
+                        <td>Buscar un plato por su ID único.</td>
+                    </tr>
+                    <tr>
+                        <td>Platos</td>
+                        <td><span class="method post">POST</span></td>
+                        <td><code>/api/platos</code></td>
+                        <td>Crear plato (Schema Zod)</td>
+                    </tr>
+                    <tr>
+                        <td>Platos</td>
+                        <td><span class="method put">PUT</span></td>
+                        <td><code>/api/platos/id</code></td>
+                        <td>Actualizar un plato existente.</td>
+                    </tr>
+                    <tr>
+                        <td>Platos</td>
+                        <td><span class="method delete">DELETE</span></td>
+                        <td><code>/api/platos/id</code></td>
+                        <td>Eliminar un plato de la base de datos.</td>
+                    </tr>
+                    <tr class="module-header">
+                        <td colspan="4">🎫 GESTIÓN DE PEDIDOS</td>
+                    </tr>
+                    <tr>
+                        <td>Pedidos</td>
+                        <td><span class="method get">GET</span></td>
+                        <td><code>/api/pedidos</code></td>
+                        <td>Listar todos los pedidos disponibles.</td>
+                    </tr>
+                    <tr>
+                        <td>Pedidos</td>
+                        <td><span class="method get">GET</span></td>
+                        <td><code>/api/pedidos/id</code></td>
+                        <td>Buscar un pedido por su ID único.</td>
+                    </tr>
+                    <tr>
+                        <td>Pedidos</td>
+                        <td><span class="method post">POST</span></td>
+                        <td><code>/api/pedidos</code></td>
+                        <td>Crear pedido (Schema Zod)</td>
+                    </tr>
+                    <tr>
+                        <td>Pedidos</td>
+                        <td><span class="method put">PUT</span></td>
+                        <td><code>/api/pedidos/id</code></td>
+                        <td>Actualizar un pedido existente.</td>
+                    </tr>
+                    <tr>
+                        <td>Pedidos</td>
+                        <td><span class="method delete">DELETE</span></td>
+                        <td><code>/api/pedidos/id</code></td>
+                        <td>Eliminar un pedido de la base de datos.</td>
+                    </tr>
+
+                    <tr class="module-header">
+                        <td colspan="4">🙋‍♀️🙋‍♂️ GESTIÓN DE CLIENTES</td>
+                    </tr>
+                    <tr>
+                        <td>Clientes</td>
+                        <td><span class="method get">GET</span></td>
+                        <td><code>/api/clientes</code></td>
+                        <td>Listar todos los clientes disponibles.</td>
+                    </tr>
+                    <tr>
+                        <td>Clientes</td>
+                        <td><span class="method get">GET</span></td>
+                        <td><code>/api/clientes/id</code></td>
+                        <td>Buscar un cliente por su ID único.</td>
+                    </tr>
+                    <tr>
+                        <td>Clientes</td>
+                        <td><span class="method post">POST</span></td>
+                        <td><code>/api/clientes</code></td>
+                        <td>Crear cliente (Schema Zod)</td>
+                    </tr>
+                    <tr>
+                        <td>Clientes</td>
+                        <td><span class="method put">PUT</span></td>
+                        <td><code>/api/clientes/id</code></td>
+                        <td>Actualizar un cliente existente.</td>
+                    </tr>
+                    <tr>
+                        <td>Clientes</td>
+                        <td><span class="method delete">DELETE</span></td>
+                        <td><code>/api/clientes/id</code></td>
+                        <td>Eliminar un cliente de la base de datos.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        </main>
+        <footer class="api-footer">
+            <p>Estado del Servidor: 🟢 Online | Auditoría npm: ✅ 0 Vulnerabilidades</p>
+        </footer>
+    </div>
+</body>
+
+</html>
